@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Package builds
+build/
+dist/
+*.egg-info/
+*.egg
+
+# uv
+.uv-cache/
+
+# Caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data is committed so nothing needs a network fetch to run.
+# Processed intermediates and figures are regenerable and stay local.
+outputs/figures/
+outputs/tmp/
+
+# Claude Code local settings (per-developer, not shared)
+.claude/settings.local.json
+
+# local archive of planning docs — never committed
+archive/
