@@ -1,0 +1,19 @@
+pair,block,model,fallback_states
+EURUSD,1,N1,"[0, 1, 2]"
+EURUSD,2,N1,"[1, 2]"
+EURUSD,3,N1,"[1, 2]"
+EURUSD,4,N1,[2]
+EURUSD,5,N1,[]
+EURUSD,6,N1,[]
+USDINR,1,N1,"[0, 1, 2]"
+USDINR,2,N1,"[1, 2]"
+USDINR,3,N1,[1]
+USDINR,4,N1,[]
+USDINR,5,N1,[]
+USDINR,6,N1,[]
+USDJPY,1,N1,"[0, 1, 2]"
+USDJPY,2,N1,"[0, 1, 2]"
+USDJPY,3,N1,[2]
+USDJPY,4,N1,[]
+USDJPY,5,N1,[]
+USDJPY,6,N1,[]
