@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+<g font-family="system-ui, sans-serif">
+<line x1="90" y1="610" x2="610" y2="90" stroke="#C3C2B7" stroke-width="1.5" stroke-dasharray="6 6"/>
+<text x="530" y="152" font-size="12" fill="#C3C2B7" transform="rotate(-45 530 152)">perfect calibration</text>
+<line x1="90.0" y1="610" x2="90.0" y2="616" stroke="#898781"/>
+<text x="90.0" y="634" font-size="13" fill="#898781" text-anchor="middle">0</text>
+<line x1="84" y1="610.0" x2="90" y2="610.0" stroke="#898781"/>
+<text x="78" y="614.0" font-size="13" fill="#898781" text-anchor="end">0</text>
+<line x1="220.0" y1="610" x2="220.0" y2="616" stroke="#898781"/>
+<text x="220.0" y="634" font-size="13" fill="#898781" text-anchor="middle">0.25</text>
+<line x1="84" y1="480.0" x2="90" y2="480.0" stroke="#898781"/>
+<text x="78" y="484.0" font-size="13" fill="#898781" text-anchor="end">0.25</text>
+<line x1="350.0" y1="610" x2="350.0" y2="616" stroke="#898781"/>
+<text x="350.0" y="634" font-size="13" fill="#898781" text-anchor="middle">0.5</text>
+<line x1="84" y1="350.0" x2="90" y2="350.0" stroke="#898781"/>
+<text x="78" y="354.0" font-size="13" fill="#898781" text-anchor="end">0.5</text>
+<line x1="480.0" y1="610" x2="480.0" y2="616" stroke="#898781"/>
+<text x="480.0" y="634" font-size="13" fill="#898781" text-anchor="middle">0.75</text>
+<line x1="84" y1="220.0" x2="90" y2="220.0" stroke="#898781"/>
+<text x="78" y="224.0" font-size="13" fill="#898781" text-anchor="end">0.75</text>
+<line x1="610.0" y1="610" x2="610.0" y2="616" stroke="#898781"/>
+<text x="610.0" y="634" font-size="13" fill="#898781" text-anchor="middle">1</text>
+<line x1="84" y1="90.0" x2="90" y2="90.0" stroke="#898781"/>
+<text x="78" y="94.0" font-size="13" fill="#898781" text-anchor="end">1</text>
+<text x="350" y="655" font-size="14" fill="#52514E" text-anchor="middle">predicted probability of up</text>
+<text x="30" y="350" font-size="14" fill="#52514E" text-anchor="middle" transform="rotate(-90 30 350)">actual frequency of up</text>
+<text x="350" y="678" font-size="12" fill="#898781" text-anchor="middle">EURUSD direction · 322 held-out predictions · 5 equal-width bins</text>
+<polyline points="275.2,432.2 342.9,362.9 430.0,241.7" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="275.2" cy="432.2" r="7.2" fill="#2a78d6"/>
+<circle cx="342.9" cy="362.9" r="8.7" fill="#2a78d6"/>
+<circle cx="430.0" cy="241.7" r="5.0" fill="#2a78d6"/>
+<polyline points="137.0,418.1 249.3,391.6 348.9,362.4 455.9,380.4 555.0,317.5" fill="none" stroke="#eb6834" stroke-width="2" stroke-linejoin="round"/>
+<rect x="131.3" y="412.4" width="11.4" height="11.4" fill="#eb6834"/>
+<rect x="244.3" y="386.6" width="10.0" height="10.0" fill="#eb6834"/>
+<rect x="343.6" y="357.1" width="10.5" height="10.5" fill="#eb6834"/>
+<rect x="450.4" y="374.8" width="11.1" height="11.1" fill="#eb6834"/>
+<rect x="550.1" y="312.5" width="9.9" height="9.9" fill="#eb6834"/>
+<polyline points="294.9,380.0" fill="none" stroke="#1baf7a" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="294.9,368.0 305.3,386.0 284.5,386.0" fill="#1baf7a"/>
+<circle cx="430.0" cy="505.0" r="6.0" fill="#2a78d6"/>
+<text x="445" y="510" font-size="14" fill="#52514E">logistic regression</text>
+<rect x="424.7" y="529.7" width="10.7" height="10.7" fill="#eb6834"/>
+<text x="445" y="540" font-size="14" fill="#52514E">gradient boosting</text>
+<polygon points="430.0,559.0 435.2,568.0 424.8,568.0" fill="#1baf7a"/>
+<text x="445" y="570" font-size="14" fill="#52514E">hidden Markov model</text>
+</g>
+</svg>

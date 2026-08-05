@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+<g font-family="system-ui, sans-serif">
+<text x="240" y="415" font-size="24" fill="#52514E" text-anchor="end">said up</text>
+<text x="240" y="605" font-size="24" fill="#52514E" text-anchor="end">said down</text>
+<text x="440" y="250" font-size="34" fill="#0B0B0B" text-anchor="middle">the model</text>
+<text x="345" y="298" font-size="24" fill="#52514E" text-anchor="middle">actually up</text>
+<text x="535" y="298" font-size="24" fill="#52514E" text-anchor="middle">actually down</text>
+<rect x="250" y="320" width="190" height="190" fill="#2a78d6" opacity="0.60" stroke="#0B0B0B" stroke-width="3"/>
+<text x="345" y="420" font-size="60" fill="#0B0B0B" text-anchor="middle">125</text>
+<text x="345" y="460" font-size="26" fill="#52514E" text-anchor="middle">62% of row</text>
+<rect x="440" y="320" width="190" height="190" fill="#2a78d6" opacity="0.26"/>
+<text x="535" y="420" font-size="60" fill="#0B0B0B" text-anchor="middle">76</text>
+<text x="535" y="460" font-size="26" fill="#52514E" text-anchor="middle">38% of row</text>
+<rect x="250" y="510" width="190" height="190" fill="#2a78d6" opacity="0.10"/>
+<text x="345" y="610" font-size="60" fill="#0B0B0B" text-anchor="middle">53</text>
+<text x="345" y="650" font-size="26" fill="#52514E" text-anchor="middle">44% of row</text>
+<rect x="440" y="510" width="190" height="190" fill="#2a78d6" opacity="0.20" stroke="#0B0B0B" stroke-width="3"/>
+<text x="535" y="610" font-size="60" fill="#0B0B0B" text-anchor="middle">68</text>
+<text x="535" y="650" font-size="26" fill="#52514E" text-anchor="middle">56% of row</text>
+<text x="850" y="250" font-size="34" fill="#0B0B0B" text-anchor="middle">the lazy benchmark</text>
+<text x="755" y="298" font-size="24" fill="#52514E" text-anchor="middle">actually up</text>
+<text x="945" y="298" font-size="24" fill="#52514E" text-anchor="middle">actually down</text>
+<rect x="660" y="320" width="190" height="190" fill="#2a78d6" opacity="0.41" stroke="#0B0B0B" stroke-width="3"/>
+<text x="755" y="420" font-size="60" fill="#0B0B0B" text-anchor="middle">97</text>
+<text x="755" y="460" font-size="26" fill="#52514E" text-anchor="middle">55% of row</text>
+<rect x="850" y="320" width="190" height="190" fill="#2a78d6" opacity="0.28"/>
+<text x="945" y="420" font-size="60" fill="#0B0B0B" text-anchor="middle">79</text>
+<text x="945" y="460" font-size="26" fill="#52514E" text-anchor="middle">45% of row</text>
+<rect x="660" y="510" width="190" height="190" fill="#2a78d6" opacity="0.29"/>
+<text x="755" y="610" font-size="60" fill="#0B0B0B" text-anchor="middle">81</text>
+<text x="755" y="650" font-size="26" fill="#52514E" text-anchor="middle">55% of row</text>
+<rect x="850" y="510" width="190" height="190" fill="#2a78d6" opacity="0.18" stroke="#0B0B0B" stroke-width="3"/>
+<text x="945" y="610" font-size="60" fill="#0B0B0B" text-anchor="middle">65</text>
+<text x="945" y="650" font-size="26" fill="#52514E" text-anchor="middle">45% of row</text>
+<text x="540" y="1050" font-size="22" fill="#898781" text-anchor="middle">EURUSD direction · 322 held-out predictions</text>
+</g>
+</svg>

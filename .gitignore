@@ -48,3 +48,12 @@ outputs/tmp/
 
 # local archive of planning docs — never committed
 archive/
+
+# regenerable intermediates
+outputs/*.csv
+outputs/*.parquet
+outputs/benchmarks/
+outputs/hedge/
+outputs/models/
+outputs/predictions/
+.ipynb_checkpoints/
