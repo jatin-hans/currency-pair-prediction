@@ -1,0 +1,7 @@
+model,variant,n,accuracy,balanced_accuracy,brier,ci
+logistic,base,402,0.396,0.332,0.691,
+logistic,with_stance,402,0.381,0.328,0.703,
+logistic,brier_diff(base-stance),402,,,-0.012,"[-0.0311, +0.0046]"
+gradient_boosting,base,402,0.425,0.345,0.699,
+gradient_boosting,with_stance,402,0.438,0.358,0.688,
+gradient_boosting,brier_diff(base-stance),402,,,0.0108,"[-0.0172, +0.0383]"

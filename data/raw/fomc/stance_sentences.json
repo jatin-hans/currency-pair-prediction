@@ -1,0 +1,1605 @@
+{
+ "20150128": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in December suggests that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Labor market conditions have improved further, with strong job gains and a lower unemployment rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Based on its current assessment, the Committee judges that it can be patient in beginning to normalize the stance of monetary policy.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee\u2019s holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20150318": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in January suggests that economic growth has moderated somewhat.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Labor market conditions have improved further, with strong job gains and a lower unemployment rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Business fixed investment is advancing, while the recovery in the housing sector remains slow and export growth has weakened.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen further improvement in the labor market and is reasonably confident that inflation will move bac",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20150429": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in March suggests that economic growth slowed during the winter months, in part reflecting transitory factors.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Business fixed investment softened, the recovery in the housing sector remained slow, and exports declined.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Inflation continued to run below the Committee's longer-run objective, partly reflecting earlier declines in energy prices and decreasing prices of non-energy imports.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Although growth in output and employment slowed during the first quarter, the Committee continues to expect that, with appropriate policy accommodation, economic activity will expand at a moderate pace, with labor market",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen further improvement in the labor market and is reasonably confident that inflation will move bac",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20150617": [
+  {
+   "sentence": "Inflation continued to run below the Committee's longer-run objective, partly reflecting earlier declines in energy prices and decreasing prices of non-energy imports;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen further improvement in the labor market and is reasonably confident that inflation will move bac",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20150729": [
+  {
+   "sentence": "Inflation continued to run below the Committee's longer-run objective, partly reflecting earlier declines in energy prices and decreasing prices of non-energy imports.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen some further improvement in the labor market and is reasonably confident that inflation will mov",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20150917": [
+  {
+   "sentence": "Household spending and business fixed investment have been increasing moderately, and the housing sector has improved further;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen some further improvement in the labor market and is reasonably confident that inflation will mov",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20151028": [
+  {
+   "sentence": "Household spending and business fixed investment have been increasing at solid rates in recent months, and the housing sector has improved further;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In determining whether it will be appropriate to raise the target range at its next meeting, the Committee will assess progress--both realized and expected--toward its objectives of maximum employment and 2 percent infla",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee anticipates that it will be appropriate to raise the target range for the federal funds rate when it has seen some further improvement in the labor market and is reasonably confident that inflation will mov",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20151216": [
+  {
+   "sentence": "Household spending and business fixed investment have been increasing at solid rates in recent months, and the housing sector has improved further;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Given the economic outlook, and recognizing the time it takes for policy actions to affect future economic outcomes, the Committee decided to raise the target range for the federal funds rate to 1/4 to 1/2 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative after this increase, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160127": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in December suggests that labor market conditions improved further even as economic growth slowed late last year.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Household spending and business fixed investment have been increasing at moderate rates in recent months, and the housing sector has improved further;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "A range of recent labor market indicators, including strong job gains, points to some additional decline in underutilization of labor resources.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160316": [
+  {
+   "sentence": "Household spending has been increasing at a moderate rate, and the housing sector has improved further;",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "A range of recent indicators, including strong job gains, points to additional strengthening of the labor market.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160427": [
+  {
+   "sentence": "Growth in household spending has moderated, although households' real income has risen at a solid rate and consumer sentiment remains high.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "A range of recent indicators, including strong job gains, points to additional strengthening of the labor market.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160615": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160727": [
+  {
+   "sentence": "Job gains were strong in June following weak growth in May.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20160921": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20161102": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting further improvement in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20161214": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 1/2 to 3/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170201": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170315": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 3/4 to 1 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170503": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in March indicates that the labor market has continued to strengthen even as growth in economic activity slowed.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Excluding energy and food, consumer prices declined in March and inflation continued to run somewhat below 2 percent.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This policy, by keeping the Committee's holdings of longer-term securities at sizable levels, should help maintain accommodative financial conditions.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170614": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 1 to 1-1/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "This program, which would gradually reduce the Federal Reserve's securities holdings by decreasing reinvestment of principal payments from those securities, is described in the accompanying addendum to the Committee's Po",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170726": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20170920": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20171101": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting some further strengthening in labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20171213": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 1-1/4 to 1\u20111/2 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180131": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180321": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 1-1/2 to 1-3/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180502": [
+  {
+   "sentence": "Recent data suggest that growth of household spending moderated from its strong fourth-quarter pace, while business fixed investment continued to grow strongly.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180613": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 1-3/4 to 2 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180801": [
+  {
+   "sentence": "The stance of monetary policy remains accommodative, thereby supporting strong labor market conditions and a sustained return to 2 percent inflation.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20180926": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 2 to 2-1/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20181108": [],
+ "20181219": [
+  {
+   "sentence": "In view of realized and expected labor market conditions and inflation, the Committee decided to raise the target range for the federal funds rate to 2-1/4 to 2\u20111/2 percent.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20190130": [
+  {
+   "sentence": "In light of global economic and financial developments and muted inflation pressures, the Committee will be patient as it determines what future adjustments to the target range for the federal funds rate may be appropria",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20190320": [
+  {
+   "sentence": "In light of global economic and financial developments and muted inflation pressures, the Committee will be patient as it determines what future adjustments to the target range for the federal funds rate may be appropria",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20190501": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in March indicates that the labor market remains strong and that economic activity rose at a solid rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In light of global economic and financial developments and muted inflation pressures, the Committee will be patient as it determines what future adjustments to the target range for the federal funds rate may be appropria",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20190619": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in May indicates that the labor market remains strong and that economic activity is rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In light of these uncertainties and muted inflation pressures, the Committee will closely monitor the implications of incoming information for the economic outlook and will act as appropriate to sustain the expansion, wi",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20190731": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in June indicates that the labor market remains strong and that economic activity has been rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In light of the implications of global developments for the economic outlook as well as muted inflation pressures, the Committee decided to lower the target range for the federal funds rate to 2 to 2-1/4 percent.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20190918": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in July indicates that the labor market remains strong and that economic activity has been rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Although household spending has been rising at a strong pace, business fixed investment and exports have weakened.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In light of the implications of global developments for the economic outlook as well as muted inflation pressures, the Committee decided to lower the target range for the federal funds rate to 1-3/4 to 2 percent.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20191011": [],
+ "20191030": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in September indicates that the labor market remains strong and that economic activity has been rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Although household spending has been rising at a strong pace, business fixed investment and exports remain weak.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In light of the implications of global developments for the economic outlook as well as muted inflation pressures, the Committee decided to lower the target range for the federal funds rate to 1-1/2 to 1-3/4 percent.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20191211": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in October indicates that the labor market remains strong and that economic activity has been rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Although household spending has been rising at a strong pace, business fixed investment and exports remain weak.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including global developments and muted inflation pressures, as it assesses the appropriate path of the target ran",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200129": [
+  {
+   "sentence": "Information received since the Federal Open Market Committee met in December indicates that the labor market remains strong and that economic activity has been rising at a moderate rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Although household spending has been rising at a moderate pace, business fixed investment and exports remain weak.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including global developments and muted inflation pressures, as it assesses the appropriate path of the target ran",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200303": [
+  {
+   "sentence": "In light of these risks and in support of achieving its maximum employment and price stability goals, the Federal Open Market Committee decided today to lower the target range for the federal funds rate by 1/2 percentage",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200315": [
+  {
+   "sentence": "Although household spending rose at a moderate pace, business fixed investment and exports remained weak.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In light of these developments, the Committee decided to lower the target range for the federal funds rate to 0 to 1/4 percent.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including information related to public health, as well as global developments and muted inflation pressures, and ",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200323": [],
+ "20200331": [],
+ "20200429": [
+  {
+   "sentence": "Weaker demand and significantly lower oil prices are holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including information related to public health, as well as global developments and muted inflation pressures, and ",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200610": [
+  {
+   "sentence": "Weaker demand and significantly lower oil prices are holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including information related to public health, as well as global developments and muted inflation pressures, and ",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200729": [
+  {
+   "sentence": "Weaker demand and significantly lower oil prices are holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee will continue to monitor the implications of incoming information for the economic outlook, including information related to public health, as well as global developments and muted inflation pressures, and ",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20200827": [
+  {
+   "sentence": "\"Our revised statement reflects our appreciation for the benefits of a strong labor market, particularly for many in low- and moderate-income communities, and that a robust job market can be sustained without causing an ",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20200916": [
+  {
+   "sentence": "Weaker demand and significantly lower oil prices are holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In addition, over coming months the Federal Reserve will increase its holdings of Treasury securities and agency mortgage-backed securities at least at the current pace to sustain smooth market functioning and help foste",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20201105": [
+  {
+   "sentence": "Weaker demand and earlier declines in oil prices have been holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In addition, over coming months the Federal Reserve will increase its holdings of Treasury securities and agency mortgage-backed securities at least at the current pace to sustain smooth market functioning and help foste",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20201216": [
+  {
+   "sentence": "Weaker demand and earlier declines in oil prices have been holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210127": [
+  {
+   "sentence": "The pace of the recovery in economic activity and employment has moderated in recent months, with weakness concentrated in the sectors most adversely affected by the pandemic.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Weaker demand and earlier declines in oil prices have been holding down consumer price inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210317": [
+  {
+   "sentence": "Following a moderation in the pace of the recovery, indicators of economic activity and employment have turned up recently, although the sectors most adversely affected by the pandemic remain weak.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Inflation continues to run below 2 percent.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210428": [
+  {
+   "sentence": "The sectors most adversely affected by the pandemic remain weak but have shown improvement.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210616": [
+  {
+   "sentence": "The sectors most adversely affected by the pandemic remain weak but have shown improvement.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210728": [
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20210922": [
+  {
+   "sentence": "Inflation is elevated, largely reflecting transitory factors.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "These asset purchases help foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and businesses.",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20211103": [
+  {
+   "sentence": "Inflation is elevated, largely reflecting factors that are expected to be transitory.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Progress on vaccinations and an easing of supply constraints are expected to support continued gains in economic activity and employment as well as a reduction in inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee expects to maintain an accommodative stance of monetary policy until these outcomes are achieved.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Federal Reserve's ongoing purchases and holdings of securities will continue to foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and busines",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20211215": [
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Progress on vaccinations and an easing of supply constraints are expected to support continued gains in economic activity and employment as well as a reduction in inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Federal Reserve's ongoing purchases and holdings of securities will continue to foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and busines",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20220126": [
+  {
+   "sentence": "Overall financial conditions remain accommodative, in part reflecting policy measures to support the economy and the flow of credit to U.S.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Progress on vaccinations and an easing of supply constraints are expected to support continued gains in economic activity and employment as well as a reduction in inflation.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "With inflation well above 2 percent and a strong labor market, the Committee expects it will soon be appropriate to raise the target range for the federal funds rate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Federal Reserve's ongoing purchases and holdings of securities will continue to foster smooth market functioning and accommodative financial conditions, thereby supporting the flow of credit to households and busines",
+   "hawk": 0,
+   "dove": 2
+  }
+ ],
+ "20220316": [
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 1/4 to 1/2 percent and anticipates that ongoing increases in the target range will be appropriate.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20220504": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has declined substantially.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3/4 to 1 percent and anticipates that ongoing increases in the target range will be appropriate.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20220615": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 1\u20111/2 to 1-3/4 percent and anticipates that ongoing increases in the target range will be appropriate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20220727": [
+  {
+   "sentence": "Recent indicators of spending and production have softened.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Nonetheless, job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher food and energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 2-1/4 to 2-1/2 percent and anticipates that ongoing increases in the target range will be appropriate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20220921": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher food and energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3 to 3-1/4 percent and anticipates that ongoing increases in the target range will be appropriate.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20221102": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher food and energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3-3/4 to 4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee anticipates that ongoing increases in the target range will be appropriate in order to attain a stance of monetary policy that is sufficiently restrictive to return inflation to 2 percent over time.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the pace of future increases in the target range, the Committee will take into account the cumulative tightening of monetary policy, the lags with which monetary policy affects economic activity and inflat",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20221214": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated, reflecting supply and demand imbalances related to the pandemic, higher food and energy prices, and broader price pressures.",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-1/4 to 4-1/2 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee anticipates that ongoing increases in the target range will be appropriate in order to attain a stance of monetary policy that is sufficiently restrictive to return inflation to 2 percent over time.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the pace of future increases in the target range, the Committee will take into account the cumulative tightening of monetary policy, the lags with which monetary policy affects economic activity and inflat",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230201": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation has eased somewhat but remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-1/2 to 4-3/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee anticipates that ongoing increases in the target range will be appropriate in order to attain a stance of monetary policy that is sufficiently restrictive to return inflation to 2 percent over time.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of future increases in the target range, the Committee will take into account the cumulative tightening of monetary policy, the lags with which monetary policy affects economic activity and infl",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230322": [
+  {
+   "sentence": "Job gains have picked up in recent months and are running at a robust pace;",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-3/4 to 5 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee anticipates that some additional policy firming may be appropriate in order to attain a stance of monetary policy that is sufficiently restrictive to return inflation to 2 percent over time.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of future increases in the target range, the Committee will take into account the cumulative tightening of monetary policy, the lags with which monetary policy affects economic activity and infl",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230503": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 5 to 5-1/4 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent to which additional policy firming may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags with",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230614": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of additional policy firming that may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags with ",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230726": [
+  {
+   "sentence": "Job gains have been robust in recent months, and the unemployment rate has remained low.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 5-1/4 to 5-1/2 percent.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of additional policy firming that may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags with ",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20230920": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Job gains have slowed in recent months but remain strong, and the unemployment rate has remained low.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of additional policy firming that may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags with ",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20231101": [
+  {
+   "sentence": "Inflation remains elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "In determining the extent of additional policy firming that may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags with ",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20231213": [
+  {
+   "sentence": "Recent indicators suggest that growth of economic activity has slowed from its strong pace in the third quarter.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In determining the extent of any additional policy firming that may be appropriate to return inflation to 2 percent over time, the Committee will take into account the cumulative tightening of monetary policy, the lags w",
+   "hawk": 2,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240131": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240320": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240501": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240612": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240731": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Job gains have moderated, and the unemployment rate has moved up but remains low.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "The Committee is strongly committed to returning inflation to its 2 percent objective.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20240918": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Job gains have slowed, and the unemployment rate has moved up but remains low.",
+   "hawk": 0,
+   "dove": 2
+  },
+  {
+   "sentence": "In light of the progress on inflation and the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/2 percentage point to 4-3/4 to 5 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20241107": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Since earlier in the year, labor market conditions have generally eased, and the unemployment rate has moved up but remains low.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In support of its goals, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4-1/2 to 4-3/4 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20241218": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Since earlier in the year, labor market conditions have generally eased, and the unemployment rate has moved up but remains low.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In support of its goals, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4-1/4 to 4-1/2 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20250129": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20250319": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20250507": [
+  {
+   "sentence": "EDT\nShare\nAlthough swings in net exports have affected the data, recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20250618": [
+  {
+   "sentence": "EDT\nShare\nAlthough swings in net exports have affected the data, recent indicators suggest that economic activity has continued to expand at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20250730": [
+  {
+   "sentence": "EDT\nShare\nAlthough swings in net exports continue to affect the data, recent indicators suggest that growth of economic activity moderated in the first half of the year.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20250822": [],
+ "20250917": [
+  {
+   "sentence": "Recent indicators suggest that growth of economic activity moderated in the first half of the year.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "Job gains have slowed, and the unemployment rate has edged up but remains low.",
+   "hawk": 0,
+   "dove": 2
+  },
+  {
+   "sentence": "Inflation has moved up and remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "The Committee is attentive to the risks to both sides of its dual mandate and judges that downside risks to employment have risen.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4 to 4\u20111/4 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20251029": [
+  {
+   "sentence": "Job gains have slowed this year, and the unemployment rate has edged up but remained low through August;",
+   "hawk": 0,
+   "dove": 2
+  },
+  {
+   "sentence": "The Committee is attentive to the risks to both sides of its dual mandate and judges that downside risks to employment rose in recent months.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20251210": [
+  {
+   "sentence": "Job gains have slowed this year, and the unemployment rate has edged up through September.",
+   "hawk": 0,
+   "dove": 2
+  },
+  {
+   "sentence": "The Committee is attentive to the risks to both sides of its dual mandate and judges that downside risks to employment rose in recent months.",
+   "hawk": 0,
+   "dove": 1
+  },
+  {
+   "sentence": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 3-1/2 to 3\u20113/4 percent.",
+   "hawk": 0,
+   "dove": 1
+  }
+ ],
+ "20260128": [
+  {
+   "sentence": "EST\nShare\nAvailable indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20260318": [
+  {
+   "sentence": "EDT\nShare\nAvailable indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains somewhat elevated.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20260429": [
+  {
+   "sentence": "Recent indicators suggest that economic activity has been expanding at a solid pace.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation is elevated, in part reflecting the recent increase in global energy prices.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20260617": [
+  {
+   "sentence": "Economic activity is expanding at a solid pace despite elevated uncertainty that owes, in part, to the conflict in the Middle East.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated relative to the Committee's 2 percent goal, in part reflecting supply shocks that have driven price increases in certain sectors, including energy.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ],
+ "20260729": [
+  {
+   "sentence": "Economic activity is expanding at a solid pace despite elevated uncertainty that owes, in part, to the conflict in the Middle East.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Inflation remains elevated relative to the Committee's 2 percent goal, in part reflecting supply shocks that have driven price increases in certain sectors, including energy.",
+   "hawk": 1,
+   "dove": 0
+  },
+  {
+   "sentence": "Logan, who preferred to raise the target range for the federal funds rate by 1/4 percentage point at this meeting.",
+   "hawk": 1,
+   "dove": 0
+  }
+ ]
+}
