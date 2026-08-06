@@ -1,182 +1,218 @@
 # Which currency questions are actually answerable?
 
-Ten years of EURUSD, USDJPY and USDINR. Three prediction targets, every model
-graded against a named baseline before it was built. Two of the three questions
-turned out to be dead ends. The third improves a rate that gets set every month.
+Ten years of daily prices for three currency pairs: EURUSD (euro vs dollar),
+USDJPY (dollar vs yen) and USDINR (dollar vs rupee). Three questions asked of
+the same data. Two turned out to be dead ends. One gives a genuinely useful
+answer.
 
-| # | Question | Verdict |
+| # | Question | Answer |
 |---|---|---|
-| 01 | Where does the rate go next? *(direction — next day, week or month)* | **No edge** |
-| 02 | How big will the moves be? *(volatility — next week)* | **Error halved** |
-| 03 | What rate should we fix ahead? *(next month's average)* | **16–28% more accurate** |
+| 01 | Which way will the rate move next? | **No — nothing beat simple guessing** |
+| 02 | How rough will next week be? | **Yes — forecast error cut roughly in half** |
+| 03 | What rate should a business plan next month around? | **Use today's rate, not last month's average — 16–28% less error** |
 
-The full analysis lives in two notebooks:
-[`notebooks/01_direction.ipynb`](notebooks/01_direction.ipynb) (the direction
-question, end to end) and
+The full analysis is in two notebooks:
+[`notebooks/01_direction.ipynb`](notebooks/01_direction.ipynb) (question 1) and
 [`notebooks/02_volatility_and_planning.ipynb`](notebooks/02_volatility_and_planning.ipynb)
-(the answerable questions). Everything below is the short version, with pointers
-into the code.
+(questions 2 and 3). Everything below is the short version.
 
 ---
 
-## What goes in
+## The data
 
-Public data only — free, reproducible, committed to this repo so it all runs
-offline: daily closes from Yahoo Finance (2015 onward), the dollar index and
-VIX, interest rates and CPI from FRED, weekly futures positioning from the
-CFTC, and 99 FOMC statements. Downloads: [`scripts/01`](scripts/01_download_data.py),
-[`08`](scripts/08_download_macro.py), [`09`](scripts/09_download_cot.py),
-[`11`](scripts/11_download_fomc.py); offline validation of every stored file:
-[`scripts/16_check_data.py`](scripts/16_check_data.py).
+All inputs are free and public, and they are stored in this repo so everything
+runs offline: daily prices from Yahoo Finance (2015 onward), interest rates and
+inflation from FRED (the US Federal Reserve's public database), weekly trading
+positions of large funds from the CFTC (a US regulator), and the Federal
+Reserve's own policy statements.
 
-Three guards run through everything:
+One bug is worth telling as a story. Yahoo timestamps its currency prices
+earlier in the day than the dollar index (a single number tracking the dollar
+against a basket of currencies). Join the two on the same date and "today's"
+dollar move secretly contains information about *tomorrow's* euro move. The
+check that caught it uses correlation — a score from −1 to +1 where near 0
+means "no connection" and near −1 or +1 means "strongly connected":
 
-1. **One-day lag on every market feature.** Found the hard way: Yahoo stamps FX
-   closes earlier in the day than the US index closes, so a naive same-date join
-   leaks the future. The check that caught it
-   ([notebook 1 §1](notebooks/01_direction.ipynb)):
+```python
+corr(dollar_move_today, euro_move_today)     # -0.09  -> no connection, as expected
+corr(dollar_move_today, euro_move_tomorrow)  # -0.87  -> strong connection = a leak from the future
+```
 
-   ```python
-   print(f"corr(dxy_t, eurusd_t)   = {eur.corr(dxy):+.2f}")        # -0.09
-   print(f"corr(dxy_t, eurusd_t+1) = {eur.shift(-1).corr(dxy):+.2f}")  # -0.87  <- the leak
-   ```
-
-   Before the fix one model showed 70% daily accuracy. After it: baseline.
-
-2. **Frequency matched to the question** — daily bars predict the next day,
-   weekly the next week, monthly the next month.
-
-3. **Walk-forward throughout** — every model refit as of each prediction date,
-   never scored on data it trained on
-   ([`src/regime_lab/data/splits.py`](src/regime_lab/data/splits.py)).
+Before the fix, one model looked 70% accurate. After shifting the data by one
+day, that advantage vanished. Every result below is from the fixed data.
 
 ---
 
-## The chart that predicts the whole study
+## One chart that explains the whole study
 
-Autocorrelation answers "does knowing the past k days tell you anything about
-today?" — asked twice on the same prices: of returns (direction) and of
-absolute returns (size).
+A simple question of the price history: "does what happened in the last few
+days tell you anything about today?" Asked twice — once about the *direction*
+of moves (blue), once about the *size* of moves (orange). Bar height = how much
+predictive information exists. Zero = none.
 
-![Autocorrelation of returns vs absolute returns](outputs/case_study/figures/autocorrelation.png)
+![Direction has no memory, size does](outputs/case_study/figures/autocorrelation.png)
 
-Size has memory at every lag on every pair; direction has essentially none.
-That asymmetry is the study's outcome in one picture: direction models are
-fighting noise, volatility models are not.
+*Chart-label translation: "returns" = direction of moves, "|returns|" = size of
+moves, "lag" = how many days back you look, "autocorr" = the bar height, i.e.
+how much predictive information there is.*
+
+The blue bars sit at zero: yesterday's direction tells you nothing about
+today's. (One blue bar on the rupee panel dips below zero — the rupee tends to
+give back a little the day after a move — but it is too small and short-lived
+to build on, and the models confirmed that.) The orange bars are clearly
+positive on every pair: wild days follow wild days, calm days follow calm
+days. In plain terms — **the market hides
+which way it will move, but telegraphs how rough the ride will be.** That is
+why question 1 fails and question 2 works.
 
 ---
 
-## Outcome 1 — the usable one: fix next month's rate from today's close
+## Question 3 first, because it's the useful one
 
-Budgets and contracts need one rate agreed in advance, and what they implicitly
-forecast is next month's **average** — its own target with its own correct
-baseline. Three estimates compared at each month-end, 104 months per pair
-([`scripts/14_period_average.py`](scripts/14_period_average.py), notebook 2 §5):
+Businesses constantly need one exchange rate agreed in advance: a budgeting
+rate, a pricing rate, a rate written into a contract. What that number is
+really trying to guess is **next month's average rate**.
 
-| Pair | Last month's average | **Today's rate carried forward** | AR model | Improvement |
+We compared three ways of setting it, at every month-end for 104 months. The
+score is simple: on average, how far off was the guess, as a percentage?
+Smaller is better.
+
+| Pair | Guess A: reuse last month's average | Guess B: use today's rate | Guess C: a small statistical model | B vs A |
 |---|---|---|---|---|
-| EURUSD | 1.21% | **1.01%** | 1.03% | −16% |
-| USDINR | 0.90% | 0.66% | **0.65%** | −28% |
-| USDJPY | 1.51% | **1.13%** | 1.14% | −25% |
+| EURUSD | off by 1.21% | **off by 1.01%** | off by 1.03% | 16% less error |
+| USDINR | off by 0.90% | off by 0.66% | **off by 0.65%** | 28% less error |
+| USDJPY | off by 1.51% | **off by 1.13%** | off by 1.14% | 25% less error |
 
-*Error as % of the realised monthly average; lower is better.*
+![Average miss per guessing method](outputs/case_study/figures/planning_rate_error.png)
 
-![Planning-rate error by estimator](outputs/case_study/figures/planning_rate_error.png)
+*Chart-label translation: "last month's average" = Guess A, "today's rate" =
+Guess B, "AR model" = Guess C. (The chart orders the pairs differently than the
+table.)*
 
-The AR model roughly ties the simple carry-forward everywhere — the gain comes
-from choosing the right baseline, not from modelling. **The operational change:
-reset the planning rate at month-end from the latest close instead of the
-trailing average.** No model to deploy, no data to buy, and it held on all
-three pairs.
+Guess A is the common habit: last month's average goes into next month's plan.
+Guess B — just use whatever the rate is today — beats it on every pair. Guess C
+(a model that continues recent price behaviour forward) does **not** beat guess B,
+which is the punchline: **the win comes from picking a better starting point,
+not from modelling.**
 
----
-
-## Outcome 2 — the forecastable one: size, not direction
-
-Ask how big next week's moves will be and the problem becomes tractable. A
-standard HAR model (yesterday's, last week's and last month's volatility as
-inputs) against carrying today's volatility forward, walk-forward on
-non-overlapping windows, 426 weeks per pair
-([`scripts/10_turbulence_har.py`](scripts/10_turbulence_har.py), notebook 2 §4):
-
-| Pair | Carry vol forward | **HAR** | HAR + ML |
-|---|---|---|---|
-| EURUSD | 0.840 | **0.360** | 0.416 |
-| USDINR | 1.721 | **0.841** | 0.990 |
-| USDJPY | 1.130 | **0.550** | 0.662 |
-
-*QLIKE, the standard volatility loss; lower is better.*
-
-![EURUSD next-week volatility, forecast vs realised](outputs/case_study/figures/har_forecast_eurusd.png)
-
-HAR roughly halves the error on every pair. Note the third column: **adding
-machine learning on top made forecasts worse in five of six cells** (monthly
-horizon included). Complexity has to earn its place; here it did not, and that
-negative is reported as part of the result.
-
-What you'd use it with: a volatility forecast doesn't say which way the rate
-moves — it says how much cushion to leave. Wider spread, earlier hedge, smaller
-position in a week forecast rough; the reverse in a calm one.
+The takeaway a company can act on: *when setting next month's planning rate,
+use today's rate, not last month's average.* Free, no model, and it held on
+all three pairs. (Code: [`scripts/14_period_average.py`](scripts/14_period_average.py))
 
 ---
 
-## Outcome 3 — the dead ends
+## Question 2: how rough will next week be?
 
-Fifteen models were graded on direction — trend and carry rules, institutional
-and retail playbooks, logistic regression, gradient boosting, random forest, a
-hidden Markov model, an ensemble (notebook 1 §4–7, full bench in
-[`scripts/07_build_dashboard.py`](scripts/07_build_dashboard.py)). Against the
-laziest baseline available — *the next period repeats the last one* — on the
-held-out final period:
+"Volatility" just means how much the price jumps around — a calm week vs a
+wild one. Knowing next week will be wild doesn't say which way prices go, but
+it tells a business how much safety margin to leave: buy protection sooner,
+charge customers a bigger buffer, put less money at stake that week.
 
-| Pair | Best edge vs floor | 95% interval | Reading |
-|---|---|---|---|
-| EURUSD | +6.4pp | [−1.8, +15.5] | crosses zero |
-| USDJPY | +1.6pp | [−4.9, +8.8] | crosses zero |
-| USDINR | +1.4pp | [−5.3, +8.7] | crosses zero |
+Two forecasters were compared, one week ahead, on 426 separate weeks per pair:
 
-One result did survive, and it's about confidence rather than accuracy:
+- **The do-nothing guess:** assume next week is as wild as the recent past.
+- **The volatility model:** a standard statistics-textbook recipe (called HAR)
+  that combines yesterday's, last week's and last month's choppiness into one
+  forecast. Nothing exotic — it's a weighted average with weights learned from
+  history.
 
-![Calibration on the held-out block](outputs/case_study/figures/calibration_block6.png)
+Result: **the model cuts the forecast error roughly in half on every pair** —
+51–57% less error, measured by the scoring rule statisticians use for
+volatility forecasts (it punishes under-warning about a storm more than
+over-warning about one). Exact numbers:
+[`turbulence_har.csv`](outputs/case_study/tables/turbulence_har.csv).
 
-Logistic regression's stated probabilities track reality; gradient boosting
-says "10%" on days that come up 37% of the time and "90%" on days that come up
-56% — far more confident than its hit rate justifies. An accuracy leaderboard
-would never show this; scoring probability quality did.
+Here is what that looks like for the euro. The gray line is how wild each week
+*actually* turned out to be. The blue line is what the model *predicted one
+week earlier*. The forecast is useful because the two lines track each other —
+the model sees the storms coming, at least roughly:
 
-The second dead end was tested rather than assumed: all 99 FOMC statements
-scored hawkish / neutral / dovish with a transparent dictionary method
-([`scripts/12_stance_score.py`](scripts/12_stance_score.py)) —
+![What actually happened vs what the model predicted a week earlier](outputs/case_study/figures/har_forecast_eurusd.png)
 
-![FOMC stance scores 2015–2026](outputs/case_study/figures/fomc_stance_timeline.png)
+*Chart-label translation: the vertical axis ("annualised %") is just the
+roughness scale — higher = wilder week. Gray = what happened, blue = the
+forecast made a week earlier.*
 
-— which validates as a *measurement* (the 2022–23 hiking cycle reads hawkish,
-the 2020 emergency cuts dovish) but adds nothing as a *predictor*: with and
-without the stance features on 402 identical weeks, both probability-score
-differences span zero ([`scripts/13_stance_ablation.py`](scripts/13_stance_ablation.py)).
-Rejected, and kept as a documented negative.
+One more finding, reported because negative results count: we also tried
+stacking machine learning (computer models that hunt for patterns on their
+own) on top of the simple recipe. It made the forecasts **worse** in five of
+six tests. More complexity is not more accuracy.
+
+(Code: [`scripts/10_turbulence_har.py`](scripts/10_turbulence_har.py), notebook 2)
 
 ---
 
-## Method, in four lines
+## Question 1: which way will the rate move? (the dead end)
 
-- **A named floor for every target** — persistence and majority-class for
-  direction, carry-forward vol for turbulence, carry-forward rate for averages.
-  Half the findings here are baseline corrections.
-- **Intervals on every headline claim** — block-bootstrap CIs with sample sizes
-  stated ([`src/regime_lab/eval.py`](src/regime_lab/eval.py)).
-- **Confidence scored, not assumed** — probability quality graded alongside
-  accuracy; overconfident models recalibrated on held-out data or labelled raw.
-- **Fully reproducible** — data, pipeline, models and every chart regenerate
-  from the numbered scripts; the notebooks and tables agree because they share
-  [`src/regime_lab`](src/regime_lab).
+Fifteen different approaches were tested — classic trading rules, several
+machine-learning models, and combinations of them. Every one was compared
+against the laziest possible guess: *"the next period repeats the last one."*
 
-Known limits: three pairs only; volatility proxied from daily closes (no
-intraday data); CPI features EURUSD-only; no rupee futures contract; FOMC
-covers the dollar leg only; no transaction costs modelled. Detail and full
-tables: [`outputs/case_study/FINDINGS.md`](outputs/case_study/FINDINGS.md).
+None of them beat it convincingly. Accuracy here is scored out of 100, so
+"+6.4" means the best model was right about 6 more times per 100 guesses than
+lazy guessing. In every case that advantage was smaller than the uncertainty
+around it — it could easily be luck:
 
-## Run it
+| Pair | Extra correct guesses per 100, vs lazy guessing | Could it just be luck? |
+|---|---|---|
+| EURUSD | +6.4 | Yes — too close to call |
+| USDJPY | +1.6 | Yes |
+| USDINR | +1.4 | Yes |
+
+One genuinely useful thing did come out of the failure. Some models state a
+confidence with each guess ("70% sure it goes up"). We checked whether those
+confidences are honest — when a model says 70%, is it right about 70% of the
+time?
+
+![Stated confidence vs reality](outputs/case_study/figures/calibration_block6.png)
+
+*Chart-label translation: "P(up)" = the model's stated chance the rate goes up;
+"held-out block" = the final stretch of data, kept hidden while the models
+were learning from history.*
+
+Read it like this: each dot is a batch of predictions; left-right is what the
+model *claimed*, up-down is what *actually happened*; the dashed diagonal is
+where an honest model's dots would sit. The simple model (logistic regression)
+sits near the line — its confidence means something. The fancy model (gradient
+boosting) is far off it: when it said "90% sure", it was right barely half the
+time. **A model can look fine on accuracy and still be dangerously
+overconfident — you only see it if you check.**
+
+We also tested whether the US Federal Reserve's policy statements help predict
+the rate. The Fed's rate-setting committee (the FOMC) publishes a statement
+after each meeting; we scored all 99 of them from hawkish (leaning toward
+higher interest rates) to dovish (leaning toward rate cuts):
+
+![Fed statements scored over time](outputs/case_study/figures/fomc_stance_timeline.png)
+
+*In the chart: red dots = hawkish statements, green = dovish, gray = neutral;
+the score runs from −1 (fully dovish) to +1 (fully hawkish).*
+
+The scoring itself works — the 2022–23 rate-hike era reads hawkish, the 2020
+emergency cuts read dovish. But feeding those scores to the models changed
+nothing: predictions got no better. Tested, rejected, and kept in the repo as
+a documented negative. (Code: [`scripts/12_stance_score.py`](scripts/12_stance_score.py),
+[`scripts/13_stance_ablation.py`](scripts/13_stance_ablation.py))
+
+---
+
+## How the testing was kept honest
+
+- **Every model raced a named "lazy" baseline** — beat that or it doesn't count.
+  Most of this study's value came from choosing the right baseline.
+- **Models were always tested on data they had never seen**, sliding forward
+  through time the way real forecasting works.
+- **Every headline claim carries a statistical uncertainty range** and a stated
+  sample size; small samples are called anecdotes, not results.
+- **Everything regenerates from the code here** — data, tables and every chart
+  above. Start with the two notebooks.
+
+Known limits: only three currency pairs; roughness measured from end-of-day
+prices (minute-by-minute data would be more precise); no trading costs modelled — this is about
+forecast quality, not a trading strategy, and nothing here is investment
+advice. Full detail: [`outputs/case_study/FINDINGS.md`](outputs/case_study/FINDINGS.md).
+
+## Run it yourself
 
 ```bash
 uv sync
@@ -184,8 +220,6 @@ uv run pytest                              # 83 tests
 uv run python scripts/16_check_data.py     # validates every stored data file
 uv run jupyter lab notebooks/
 ```
-
-Nothing here is investment advice.
 
 ## License
 
