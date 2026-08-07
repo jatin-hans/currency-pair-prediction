@@ -82,7 +82,7 @@
 
   /* ---------- figures ---------- */
   figure{margin:2rem 0 0;padding:0}
-  figure img{width:100%;height:auto;display:block;background:#fff;box-shadow:0 1px 0 var(--rule)}
+  figure img{max-width:100%;height:auto;display:block;background:#fff;box-shadow:0 1px 0 var(--rule)}
   figcaption{font-family:var(--mono);font-size:.76rem;line-height:1.6;color:var(--ink-soft);margin-top:.7rem;max-width:70ch}
   figcaption b{color:var(--ink)}
 
@@ -137,7 +137,7 @@
 
   ul.plain{margin:1.2rem 0 0;padding:0;list-style:none;max-width:62ch}
   ul.plain li{padding:.55rem 0 .55rem 1.4rem;border-bottom:1px solid var(--rule);position:relative;font-size:.98rem}
-  ul.plain li::before{content:"\2014";position:absolute;left:0;color:var(--ink-soft);font-family:var(--mono)}
+  ul.plain li::before{content:"-";position:absolute;left:0;color:var(--ink-soft);font-family:var(--mono)}
 
   /* ---------- appendix ---------- */
   .appendix-block{margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--rule)}
@@ -146,6 +146,23 @@
 
   footer{padding:2.6rem 0 3.4rem;font-family:var(--mono);font-size:.78rem;line-height:1.7;color:var(--ink-soft)}
   footer p{max-width:72ch}
+
+  /* ---------- centered article column, wide data breakouts ---------- */
+  .wrap>:not(.rows,.scroller,figure,.bars,.snippet,.snippet-src,.caption,.grid3,.method,.action,.appendix-block){max-width:min(36rem,100%);margin-inline:auto}
+  .wrap>.action{max-width:min(44rem,100%);margin-inline:auto}
+  .wrap>.snippet,.wrap>.snippet-src{max-width:min(48rem,100%);margin-inline:auto}
+  figure img,figcaption{margin-inline:auto}
+  .appendix-block>:not(.scroller,.caption){max-width:min(36rem,100%);margin-inline:auto}
+
+  /* ---------- collapsed appendix ---------- */
+  .wrap>.appendix-details{max-width:none}
+  .appendix-details>summary{cursor:pointer;list-style:none}
+  .appendix-details>summary::-webkit-details-marker{display:none}
+  .appendix-details>summary>*{max-width:min(36rem,100%);margin-inline:auto}
+  .appendix-toggle{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--up);margin-top:.2rem}
+  .appendix-toggle::after{content:"+ Expand the appendix"}
+  .appendix-details[open] .appendix-toggle::after{content:"- Collapse the appendix"}
+  .appendix-details>summary:hover .appendix-toggle{text-decoration:underline;text-underline-offset:.18em}
 </style>
 </head>
 <body>
@@ -161,14 +178,14 @@
     </p>
     <div class="rows">
       <div class="row"><span class="n row-anim">01</span>
-        <span class="q row-anim">Which way will the rate move next?<span>Direction &mdash; next day, week or month</span></span>
+        <span class="q row-anim">Which way will the rate move next?<span>Direction - next day, week or month</span></span>
         <span class="verdict no row-anim">Couldn&#x27;t beat guessing</span></div>
       <div class="row"><span class="n row-anim">02</span>
-        <span class="q row-anim">How rough will next week be?<span>Volatility &mdash; the size of the moves</span></span>
+        <span class="q row-anim">How rough will next week be?<span>Volatility - the size of the moves</span></span>
         <span class="verdict yes row-anim">Error halved</span></div>
       <div class="row"><span class="n row-anim">03</span>
         <span class="q row-anim">What rate should we plan next month around?<span>Next month's average rate</span></span>
-        <span class="verdict win row-anim">16&ndash;28% more accurate</span></div>
+        <span class="verdict win row-anim">16-28% more accurate</span></div>
     </div>
   </div>
 </header>
@@ -177,7 +194,7 @@
 <section>
   <div class="wrap">
     <p class="kicker">What goes in</p>
-    <h2>Free public data &mdash; and the bug that nearly fooled us</h2>
+    <h2>Free public data - and the bug that nearly fooled us</h2>
     <p class="lede">
       Nothing here is proprietary or paid. Daily prices come from Yahoo Finance (2015 onward), interest rates and
       inflation from FRED (the US Federal Reserve's public database), weekly positions of large trading funds from a
@@ -194,7 +211,7 @@
         <tbody>
           <tr><th scope="row">Daily prices</th><td class="note">Closing price for each pair, back to 2015 (the first year is used to warm up the calculations)</td><td>Yahoo Finance</td><td>All 3 pairs</td></tr>
           <tr><th scope="row">Recent moves &amp; momentum</th><td class="note">The last move plus how far the price travelled over 1, 3, 6 and 12 months</td><td>Derived</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Choppiness, 3 windows</th><td class="note">How much the price has been jumping around &mdash; over short, medium and long windows of past days</td><td>Derived</td><td>All 3 pairs</td></tr>
+          <tr><th scope="row">Choppiness, 3 windows</th><td class="note">How much the price has been jumping around - over short, medium and long windows of past days</td><td>Derived</td><td>All 3 pairs</td></tr>
           <tr><th scope="row">Market backdrop</th><td class="note">Moves in the dollar index (one number tracking the dollar against a basket of currencies) and the VIX, a widely used market-nervousness gauge</td><td>Yahoo Finance</td><td>All 3 pairs</td></tr>
           <tr><th scope="row">Interest-rate gap</th><td class="note">The difference between what each currency earns in interest</td><td>FRED</td><td>All 3 pairs</td></tr>
           <tr><th scope="row">Fund positioning</th><td class="note">Whether large funds are betting for or against the euro and the yen, reported weekly</td><td>CFTC</td><td class="worse">No rupee version exists</td></tr>
@@ -209,13 +226,13 @@
 
     <h3 style="margin-top:2.6rem">The timestamp bug</h3>
     <p>
-      Early on, one model looked 70% accurate at predicting the next day &mdash; implausibly good. The cause turned
+      Early on, one model looked 70% accurate at predicting the next day - implausibly good. The cause turned
       out to be a timestamp mismatch: Yahoo stamps its currency prices earlier in the day than it stamps the dollar
       index. Join the two on the same date, and &ldquo;today's&rdquo; dollar move secretly contains information about
       <em>tomorrow's</em> euro move. The model wasn't smart; it was peeking.
     </p>
     <p>
-      The check that caught it uses correlation &mdash; a score from &minus;1 to +1 where near 0 means &ldquo;no
+      The check that caught it uses correlation - a score from &minus;1 to +1 where near 0 means &ldquo;no
       connection&rdquo; and near &minus;1 or +1 means &ldquo;strongly connected&rdquo;:
     </p>
 <div class="snippet">eur = log(closes["EURUSD"]).diff()          <span class="c"># the euro's daily moves</span>
@@ -230,7 +247,7 @@ dxy = closes["DXY"].shift(1)</div>
     <p class="snippet-src">From notebooks/01_direction.ipynb, section 1</p>
     <p style="margin-top:1.05rem">
       After the one-day shift, the 70% &ldquo;accuracy&rdquo; collapsed to ordinary guessing. Every number on this
-      page comes from the fixed data &mdash; and finding this bug is, honestly, the most transferable result of the
+      page comes from the fixed data - and finding this bug is, honestly, the most transferable result of the
       whole project: <strong>when a forecast looks too good for its field, audit the timestamps first.</strong>
     </p>
 
@@ -251,7 +268,7 @@ dxy = closes["DXY"].shift(1)</div>
         <span class="tag">Guard 3</span>
         <h3>Tested only on unseen data</h3>
         <p>Models slide forward through time, re-trained at each date, and are always scored on data they have never seen
-        &mdash; the way real forecasting works.</p>
+        - the way real forecasting works.</p>
       </div>
     </div>
   </div>
@@ -264,21 +281,20 @@ dxy = closes["DXY"].shift(1)</div>
     <h2>One chart that predicts the whole study</h2>
     <p class="lede">
       Before building any model, ask the price history a simple question: <em>&ldquo;does what happened in the last
-      few days tell you anything about today?&rdquo;</em> Ask it twice &mdash; once about the <strong>direction</strong>
+      few days tell you anything about today?&rdquo;</em> Ask it twice - once about the <strong>direction</strong>
       of moves, once about their <strong>size</strong>.
     </p>
     <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/autocorrelation.png"
+      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/autocorrelation.png" width="1081" height="296"
            alt="Bar chart per pair: blue bars near zero for direction, orange bars clearly positive for size" loading="lazy">
       <figcaption>
-        <b>How to read it:</b> each bar is &ldquo;how much does knowing what happened N days ago help?&rdquo; &mdash;
-        zero means not at all. Chart-label translation: &ldquo;returns&rdquo; = direction of moves, &ldquo;|returns|&rdquo;
-        = size of moves, &ldquo;lag&rdquo; = how many days back you look, &ldquo;autocorr&rdquo; = the bar height.
+        <b>How to read it:</b> each bar is &ldquo;how much does knowing what happened N days ago help?&rdquo; -
+        zero means not at all. &ldquo;lag&rdquo; = how many days back you look, &ldquo;autocorr&rdquo; = the bar height.
       </figcaption>
     </figure>
     <p style="margin-top:1.4rem">
       The blue bars sit at zero on every pair: yesterday's direction tells you nothing about today's. (One blue bar
-      on the rupee panel dips below zero &mdash; the rupee tends to give back a little the day after a move &mdash;
+      on the rupee panel dips below zero - the rupee tends to give back a little the day after a move -
       but it is too small and short-lived to build on, and the models later confirmed that.) The orange bars are
       clearly positive everywhere: wild days follow wild days, calm days follow calm days.
     </p>
@@ -295,19 +311,19 @@ dxy = closes["DXY"].shift(1)</div>
     <p class="kicker">Outcome 01 &middot; the usable one</p>
     <h2>Plan next month around today's rate, not last month's average</h2>
     <p class="lede">
-      Businesses constantly need one exchange rate agreed in advance &mdash; a budgeting rate, a pricing rate, a rate
+      Businesses constantly need one exchange rate agreed in advance - a budgeting rate, a pricing rate, a rate
       written into a contract. What that number is really trying to guess is <em>next month's average rate</em>, and
       it is rarely tested as its own question.
     </p>
     <p>
-      We compared three ways of setting it, at every month-end across 104 months (2017&ndash;2026). The score is
+      We compared three ways of setting it, at every month-end across 104 months (2017-2026). The score is
       simple: on average, how far off was the guess, as a percentage of the average that actually happened? Smaller
       is better.
     </p>
 
     <div class="scroller">
       <table>
-        <caption>Average miss per guessing method &mdash; 104 months per pair, lower is better</caption>
+        <caption>Average miss per guessing method - 104 months per pair, lower is better</caption>
         <thead>
           <tr>
             <th scope="col">Pair</th>
@@ -345,7 +361,7 @@ dxy = closes["DXY"].shift(1)</div>
     </div>
 
     <p style="margin-top:1.6rem">
-      The whole test fits in a few lines &mdash; at each month-end, record what each method would have guessed, then
+      The whole test fits in a few lines - at each month-end, record what each method would have guessed, then
       compare with the average that actually happened:
     </p>
 <div class="snippet"><span class="k">for</span> each month_end:
@@ -354,17 +370,17 @@ dxy = closes["DXY"].shift(1)</div>
     guess_c = ar_model(recent_moves).forecast()    <span class="c"># continue recent behaviour forward</span>
     actual  = average(prices, next_month)          <span class="c"># known a month later</span>
     record(percent_miss(guess, actual) <span class="k">for</span> each guess)</div>
-    <p class="snippet-src">Condensed from scripts/14_period_average.py &mdash; full version in the repo</p>
+    <p class="snippet-src">Condensed from scripts/14_period_average.py - full version in the repo</p>
 
     <p style="margin-top:1.4rem">
-      Guess C &mdash; the statistical model &mdash; ties guess B everywhere. That is the punchline: <strong>the win
+      Guess C - the statistical model - ties guess B everywhere. That is the punchline: <strong>the win
       comes from picking a better starting point, not from modelling.</strong>
     </p>
 
     <div class="action">
       <span class="lbl">The operational change</span>
       <p>At each month-end, set the planning rate from today&#x27;s rate instead of last month&#x27;s average.</p>
-      <p>No model to deploy, no data to buy &mdash; and it held on all three pairs tested.</p>
+      <p>No model to deploy, no data to buy - and it held on all three pairs tested.</p>
     </div>
   </div>
 </section>
@@ -375,7 +391,7 @@ dxy = closes["DXY"].shift(1)</div>
     <p class="kicker">Outcome 02 &middot; the forecastable one</p>
     <h2>Size is predictable where direction is not</h2>
     <p class="lede">
-      &ldquo;Volatility&rdquo; just means how much the price jumps around &mdash; a calm week versus a wild one.
+      &ldquo;Volatility&rdquo; just means how much the price jumps around - a calm week versus a wild one.
       Knowing next week will be wild doesn't say which way prices go, but it tells a business how much safety margin
       to leave: buy protection sooner, charge a bigger buffer, put less money at stake that week.
     </p>
@@ -383,7 +399,7 @@ dxy = closes["DXY"].shift(1)</div>
       Two forecasters were compared one week ahead, on 426 separate weeks per pair. The <strong>do-nothing
       guess</strong>: assume next week is as wild as the recent past. The <strong>volatility model</strong>: a
       standard statistics-textbook recipe (called HAR) that blends yesterday's, last week's and last month's
-      choppiness into one forecast &mdash; a weighted average whose weights are learned from history:
+      choppiness into one forecast - a weighted average whose weights are learned from history:
     </p>
 <div class="snippet"><span class="c"># three views of recent choppiness ...</span>
 vol_yesterday = abs(move_yesterday)
@@ -395,25 +411,25 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
     <p class="snippet-src">The HAR recipe, condensed from scripts/10_turbulence_har.py</p>
 
     <p style="margin-top:1.4rem">
-      Result: <strong>the model cuts the forecast error roughly in half on every pair</strong> &mdash; 51&ndash;57%
+      Result: <strong>the model cuts the forecast error roughly in half on every pair</strong> - 51-57%
       less error, measured by the scoring rule statisticians use for volatility forecasts (it punishes under-warning
       about a storm more than over-warning about one).
     </p>
 
     <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/har_forecast_eurusd.png"
+      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/har_forecast_eurusd.png" width="934" height="334"
            alt="Line chart: realised weekly volatility in gray, the model's week-earlier forecast in blue, tracking each other" loading="lazy">
       <figcaption>
         <b>How to read it:</b> the gray line is how wild each week of EURUSD <em>actually</em> turned out to be; the
         blue line is what the model <em>predicted one week earlier</em>. The forecast is useful because the two lines
-        track each other &mdash; the model sees the storms coming, at least roughly. The vertical axis
+        track each other - the model sees the storms coming, at least roughly. The vertical axis
         (&ldquo;annualised %&rdquo;) is just the roughness scale: higher = wilder.
       </figcaption>
     </figure>
 
     <div class="scroller">
       <table>
-        <caption>Next-week forecast error &mdash; 426 weeks per pair, lower is better</caption>
+        <caption>Next-week forecast error - 426 weeks per pair, lower is better</caption>
         <thead>
           <tr>
             <th scope="col">Pair</th><th scope="col">Forecaster</th>
@@ -421,15 +437,15 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
           </tr>
         </thead>
         <tbody>
-          <tr><th scope="row" rowspan="3">EURUSD</th><td>Do-nothing guess</td><td class="num">0.84</td><td class="num">&mdash;</td></tr>
+          <tr><th scope="row" rowspan="3">EURUSD</th><td>Do-nothing guess</td><td class="num">0.84</td><td class="num">-</td></tr>
           <tr><td>Volatility model (HAR)</td><td class="num best">0.36</td><td class="num best">57% less error</td></tr>
           <tr class="group-end"><td>HAR + machine learning</td><td class="num worse">0.42</td><td class="num worse">worse than HAR alone</td></tr>
 
-          <tr><th scope="row" rowspan="3">USDINR</th><td>Do-nothing guess</td><td class="num">1.72</td><td class="num">&mdash;</td></tr>
+          <tr><th scope="row" rowspan="3">USDINR</th><td>Do-nothing guess</td><td class="num">1.72</td><td class="num">-</td></tr>
           <tr><td>Volatility model (HAR)</td><td class="num best">0.84</td><td class="num best">51% less error</td></tr>
           <tr class="group-end"><td>HAR + machine learning</td><td class="num worse">0.99</td><td class="num worse">worse than HAR alone</td></tr>
 
-          <tr><th scope="row" rowspan="3">USDJPY</th><td>Do-nothing guess</td><td class="num">1.13</td><td class="num">&mdash;</td></tr>
+          <tr><th scope="row" rowspan="3">USDJPY</th><td>Do-nothing guess</td><td class="num">1.13</td><td class="num">-</td></tr>
           <tr><td>Volatility model (HAR)</td><td class="num best">0.55</td><td class="num best">51% less error</td></tr>
           <tr><td>HAR + machine learning</td><td class="num worse">0.66</td><td class="num worse">worse than HAR alone</td></tr>
         </tbody>
@@ -438,8 +454,8 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
     <p class="caption">
       Note the third row of every block: stacking machine learning (computer models that hunt for patterns on their
       own) on top of the simple recipe made forecasts <em>worse</em> every time at this horizon. A horizon is how
-      far ahead the forecast looks &mdash; here, one week. The error score is the volatility scoring rule described
-      above; its units only matter for comparison &mdash; lower is better. Complexity has to earn its place, and here it did not.
+      far ahead the forecast looks - here, one week. The error score is the volatility scoring rule described
+      above; its units only matter for comparison - lower is better. Complexity has to earn its place, and here it did not.
       Monthly results and a measurement note are in the appendix.
     </p>
 
@@ -448,7 +464,7 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
       <p>Knowing next week is likely to be rough doesn't tell you which way the rate moves. It tells you how much
       cushion to leave.</p>
       <p>In practice: buy protection sooner, price in a bigger buffer, or put less at stake in a week forecast to be
-      wild &mdash; and the reverse in a week forecast calm.</p>
+      wild - and the reverse in a week forecast calm.</p>
     </div>
   </div>
 </section>
@@ -459,24 +475,24 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
     <p class="kicker">Outcome 03 &middot; the dead ends</p>
     <h2>Nothing beat &ldquo;the next period repeats the last one&rdquo;</h2>
     <p class="lede">
-      Fifteen approaches were graded on direction &mdash; classic trading rules, statistical models,
+      Fifteen approaches were graded on direction - classic trading rules, statistical models,
       machine-learning models, and combinations. Every one raced the laziest possible guess: <em>assume the next
       period does what the last one did.</em>
     </p>
     <p>
       Accuracy is scored out of 100, so &ldquo;+6.4&rdquo; below means the best model was right about 6 more times
       per 100 guesses than lazy guessing. In every case that advantage was smaller than the uncertainty around it
-      &mdash; it could easily be luck:
+      - it could easily be luck:
     </p>
 
     <div class="scroller">
       <table>
-        <caption>Best model vs lazy guessing &mdash; final test period the models never saw, 322 predictions per pair</caption>
+        <caption>Best model vs lazy guessing - final test period the models never saw, 322 predictions per pair</caption>
         <thead>
           <tr><th scope="col">Pair</th><th scope="col" class="num">Extra correct guesses per 100</th><th scope="col">Could it just be luck?</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">EURUSD</th><td class="num">+6.4</td><td class="note">Yes &mdash; too close to call</td></tr>
+          <tr><th scope="row">EURUSD</th><td class="num">+6.4</td><td class="note">Yes - too close to call</td></tr>
           <tr><th scope="row">USDJPY</th><td class="num">+1.6</td><td class="note">Yes</td></tr>
           <tr><th scope="row">USDINR</th><td class="num">+1.4</td><td class="note">Yes</td></tr>
         </tbody>
@@ -489,7 +505,7 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
       confidences are honest: when a model says 70%, is it right about 70% of the time?
     </p>
     <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/calibration_block6.png"
+      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/calibration_block6.png" width="534" height="484"
            alt="Calibration chart: the simple model's dots near the diagonal, the complex model's far from it" loading="lazy">
       <figcaption>
         <b>How to read it:</b> each dot is a batch of predictions. Left-right is what the model <em>claimed</em>;
@@ -499,9 +515,9 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
       </figcaption>
     </figure>
     <p style="margin-top:1.4rem">
-      The simple model (logistic regression) sits near the line &mdash; its confidence means something. The complex
+      The simple model (logistic regression) sits near the line - its confidence means something. The complex
       one (gradient boosting) is far off it: when it said &ldquo;90% sure&rdquo;, it was right barely half the time.
-      <strong>A model can look fine on accuracy and still be dangerously overconfident &mdash; you only see it if
+      <strong>A model can look fine on accuracy and still be dangerously overconfident - you only see it if
       you check.</strong> Anyone who acts on a stated probability should care about this chart more than any
       accuracy table.
     </p>
@@ -510,7 +526,7 @@ next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
     <p>
       The second dead end was tested rather than assumed. The Fed's rate-setting committee (the FOMC) publishes a
       statement after each meeting; we scored all 99 of them from hawkish (leaning toward higher interest rates) to
-      dovish (leaning toward cuts) with a transparent dictionary method &mdash; counting phrases, so any reader can
+      dovish (leaning toward cuts) with a transparent dictionary method - counting phrases, so any reader can
       check why a statement scored the way it did:
     </p>
 <div class="snippet">hawkish_phrases = [<span class="k">"inflation remains elevated"</span>, <span class="k">"tightening"</span>, <span class="k">"restrictive"</span>, ...]
@@ -521,17 +537,17 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
     <p class="snippet-src">Condensed from scripts/12_stance_score.py</p>
 
     <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/fomc_stance_timeline.png"
+      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/fomc_stance_timeline.png" width="934" height="303"
            alt="Timeline of Fed statement scores 2015-2026: dovish through 2020, strongly hawkish 2022-23" loading="lazy">
       <figcaption>
         <b>How to read it:</b> red dots = hawkish statements, green = dovish, gray = neutral; the black line is the
-        average of the last four meetings. The scorer passes the sanity check &mdash; the 2022&ndash;23 rate-hike era
+        average of the last four meetings. The scorer passes the sanity check - the 2022-23 rate-hike era
         reads hawkish, the 2020 emergency cuts read dovish.
       </figcaption>
     </figure>
     <p style="margin-top:1.4rem">
       So the <em>measurement</em> works. But fed into the models across the same 402 weeks, the scores changed
-      nothing &mdash; predictions got no better with them than without. The input was rejected, and the experiment
+      nothing - predictions got no better with them than without. The input was rejected, and the experiment
       kept in the repo as a documented negative. A measurement can be valid and still add no forecasting value; both
       facts are worth publishing.
     </p>
@@ -568,7 +584,7 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
       <div>
         <h3>A named &ldquo;lazy guess&rdquo; for every question</h3>
         <p>Repeat-the-last-period for direction, assume-it-continues for volatility, carry-forward for the planning
-        rate. Beat the lazy guess or it doesn't count &mdash; half of what this study found came from fixing the
+        rate. Beat the lazy guess or it doesn't count - half of what this study found came from fixing the
         comparison, not the model.</p>
       </div>
       <div>
@@ -579,11 +595,11 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
       <div>
         <h3>Confidence scored, not assumed</h3>
         <p>Stated probabilities are graded against reality. Overconfident models get their confidence corrected
-        using data they haven&#x27;t seen &mdash; or are shown as-is, with a warning attached.</p>
+        using data they haven&#x27;t seen - or are shown as-is, with a warning attached.</p>
       </div>
       <div>
         <h3>Fully reproducible</h3>
-        <p>Data, pipeline, models and every chart on this page regenerate from the repository &mdash; two notebooks
+        <p>Data, pipeline, models and every chart on this page regenerate from the repository - two notebooks
         tell the story end to end, numbered scripts rebuild every table.</p>
       </div>
     </div>
@@ -593,17 +609,21 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
 <!-- ============ APPENDIX ============ -->
 <section id="appendix">
   <div class="wrap">
-    <p class="kicker">Appendix</p>
-    <h2>Detail, caveats and what sits behind the summary</h2>
+    <details class="appendix-details">
+      <summary>
+        <span class="kicker" style="display:block">Appendix</span>
+        <h2>Detail, caveats and what sits behind the summary</h2>
+        <span class="appendix-toggle"></span>
+      </summary>
 
     <div class="appendix-block">
-      <h3>A.1 &mdash; Volatility at the monthly horizon</h3>
+      <h3>A.1 - Volatility at the monthly horizon</h3>
       <p>The weekly result is the headline because it is the horizon most decisions run on. The monthly horizon has a
       smaller sample and a less clean story: the simple model still wins on two pairs, the machine-learning variant
       narrowly takes the rupee, and all the gaps are smaller.</p>
       <div class="scroller">
         <table>
-          <caption>Next-month forecast error &mdash; 97 months per pair; same error score as the weekly table, lower is better</caption>
+          <caption>Next-month forecast error - 97 months per pair; same error score as the weekly table, lower is better</caption>
           <thead>
             <tr><th scope="col">Pair</th><th scope="col">Forecaster</th><th scope="col" class="num">Error score</th></tr>
           </thead>
@@ -622,45 +642,45 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
       </div>
       <p class="caption">
         Measurement caveat: roughness here is estimated from end-of-day prices. Minute-by-minute data would measure
-        it more precisely, and wasn't available &mdash; so these are approximations and the claims are kept
+        it more precisely, and wasn't available - so these are approximations and the claims are kept
         proportionate to that.
       </p>
     </div>
 
     <div class="appendix-block">
-      <h3>A.2 &mdash; The Fed-language numbers</h3>
+      <h3>A.2 - The Fed-language numbers</h3>
       <p>The direction models were run with and without the Fed-language inputs on the same 402 weeks. One note so
-      the numbers below don&#x27;t surprise you: these are <em>three-way</em> guesses &mdash; up, down, or
-      roughly flat &mdash; so random guessing scores about 33%, and numbers below 50% are normal, not broken.
+      the numbers below don&#x27;t surprise you: these are <em>three-way</em> guesses - up, down, or
+      roughly flat - so random guessing scores about 33%, and numbers below 50% are normal, not broken.
       Accuracy barely moved, in opposite directions for the two models, and the statistical uncertainty around both
-      differences includes zero &mdash; the definition of &ldquo;no measurable effect&rdquo;.</p>
+      differences includes zero - the definition of &ldquo;no measurable effect&rdquo;.</p>
       <div class="scroller">
         <table>
-          <caption>Direction accuracy with and without the Fed-language input &mdash; the same 402 weeks for both</caption>
+          <caption>Direction accuracy with and without the Fed-language input - the same 402 weeks for both</caption>
           <thead>
             <tr><th scope="col">Model</th><th scope="col" class="num">Without</th><th scope="col" class="num">With</th><th scope="col">Verdict</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Logistic regression</th><td class="num">39.6%</td><td class="num worse">38.1%</td><td class="note">slightly worse &mdash; within noise</td></tr>
-            <tr><th scope="row">Gradient boosting</th><td class="num">42.5%</td><td class="num">43.8%</td><td class="note">slightly better &mdash; within noise</td></tr>
+            <tr><th scope="row">Logistic regression</th><td class="num">39.6%</td><td class="num worse">38.1%</td><td class="note">slightly worse - within noise</td></tr>
+            <tr><th scope="row">Gradient boosting</th><td class="num">42.5%</td><td class="num">43.8%</td><td class="note">slightly better - within noise</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="appendix-block">
-      <h3>A.3 &mdash; Known limits of this study</h3>
+      <h3>A.3 - Known limits of this study</h3>
       <ul class="plain">
-        <li>Three pairs only &mdash; two heavily traded, one from a developing economy. Findings should not be assumed to carry to other currencies</li>
+        <li>Three pairs only - two heavily traded, one from a developing economy. Findings should not be assumed to carry to other currencies</li>
         <li>Roughness is estimated from end-of-day prices rather than measured minute by minute</li>
         <li>No rupee version of the fund-positioning data exists, so USDINR sits that input out</li>
-        <li>Central-bank language covers the Fed only &mdash; the Indian central bank's statements were not machine-collectable</li>
+        <li>Central-bank language covers the Fed only - the Indian central bank's statements were not machine-collectable</li>
         <li>No transaction costs are modelled; this is about forecast quality, not a trading strategy</li>
       </ul>
     </div>
 
     <div class="appendix-block">
-      <h3>A.4 &mdash; What is in the repository</h3>
+      <h3>A.4 - What is in the repository</h3>
       <ul class="plain">
         <li>Two notebooks that tell the whole story: direction end-to-end, then volatility, the planning rate and the Fed-language experiment</li>
         <li>The full bench of fifteen direction models, including classic institutional and retail trading rules, each with its own scorecard</li>
@@ -669,6 +689,7 @@ score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
         <li>The full findings write-up with statistical detail kept out of this page</li>
       </ul>
     </div>
+    </details>
   </div>
 </section>
 
