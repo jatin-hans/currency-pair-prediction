@@ -3,704 +3,480 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Which currency questions are actually answerable?</title>
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon.ico">
+<link rel="canonical" href="https://jatinhans.com/lab/currency/">
+<meta name="description" content="Ten years of daily prices, three currency questions, every answer graded against a stated simple guess. Two dead ends and one usable result - a frozen, reproducible study by Jatin Hans.">
+<meta property="og:title" content="Which currency questions are actually answerable?">
+<meta property="og:description" content="Three questions asked of ten years of currency data. Two dead ends, one usable result - fully reproducible.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jatinhans.com/lab/currency/">
+<title>Which currency questions are actually answerable? - Jatin Hans</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --board:#0E1B18;
-    --paper:#F0EFE9;
-    --ink:#16211D;
-    --ink-soft:#5A6862;
-    --up:#1E7A50;
-    --down:#B5372B;
-    --amber:#D0A03C;
-    --rule:rgba(22,33,29,.14);
-    --rule-strong:rgba(22,33,29,.32);
-    --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
-    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-    --wrap:min(70rem,100% - 2.5rem);
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--body);font-size:clamp(1rem,.96rem + .2vw,1.115rem);
-    line-height:1.62;font-variant-numeric:tabular-nums;
-  }
-  .wrap{width:var(--wrap);margin-inline:auto}
-  a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:1px}
-  a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-
-  /* ---------- board hero ---------- */
-  .board{background:var(--board);color:#EAEFEC;padding:clamp(2.4rem,6vw,4.5rem) 0 clamp(2rem,4vw,3rem)}
-  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.19em;text-transform:uppercase;color:var(--amber);margin:0 0 1.4rem}
-  .board h1{
-    font-family:var(--display);font-weight:800;
-    font-size:clamp(2.1rem,1.2rem + 4.2vw,4.05rem);
-    line-height:1.02;letter-spacing:-.025em;margin:0 0 1.1rem;max-width:19ch;
-  }
-  .standfirst{max-width:56ch;margin:0 0 clamp(2.2rem,5vw,3.2rem);color:#B9C6BF;font-size:clamp(1.02rem,.98rem + .25vw,1.2rem)}
-  .standfirst strong{color:#EAEFEC;font-weight:600}
-  .rows{border-top:1px solid rgba(234,239,236,.22)}
-  .row{display:grid;grid-template-columns:2.2rem 1fr auto;gap:1rem 1.4rem;align-items:baseline;padding:1.15rem 0;border-bottom:1px solid rgba(234,239,236,.14)}
-  .row .n{font-family:var(--mono);font-size:.78rem;color:#6F847B}
-  .row .q{font-family:var(--display);font-weight:600;font-size:clamp(1.02rem,.95rem + .4vw,1.35rem);letter-spacing:-.01em}
-  .row .q span{display:block;font-family:var(--body);font-weight:400;font-size:.9rem;color:#93A49C;letter-spacing:0;margin-top:.15rem}
-  .verdict{font-family:var(--mono);font-weight:600;font-size:clamp(.72rem,.66rem + .3vw,.86rem);letter-spacing:.11em;text-transform:uppercase;text-align:right;white-space:nowrap}
-  .verdict.no{color:#D98A80}
-  .verdict.yes{color:#6FC79A}
-  .verdict.win{color:var(--amber)}
-  .row-anim{opacity:0;transform:translateY(.5rem);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
-  .row:nth-child(1) .row-anim{animation-delay:.10s}
-  .row:nth-child(2) .row-anim{animation-delay:.22s}
-  .row:nth-child(3) .row-anim{animation-delay:.34s}
-  @keyframes rise{to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.row-anim{animation:none;opacity:1;transform:none}}
-
-  /* ---------- sections ---------- */
-  section{padding:clamp(2.8rem,6vw,4.6rem) 0;border-bottom:1px solid var(--rule)}
-  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.19em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .8rem}
-  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.08;font-size:clamp(1.55rem,1.15rem + 1.7vw,2.5rem);margin:0 0 1rem;max-width:22ch}
-  h3{font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:-.01em;margin:0 0 .35rem}
-  p{margin:0 0 1.05rem;max-width:64ch}
-  .lede{font-size:clamp(1.05rem,1rem + .3vw,1.22rem);max-width:58ch}
-
-  .action{margin:2rem 0 0;padding:1.35rem 1.5rem;background:#fff;border-left:4px solid var(--amber);box-shadow:0 1px 0 var(--rule)}
-  .action .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:.4rem}
-  .action p{margin:0;font-size:1.08rem;font-weight:600;max-width:60ch}
-  .action p + p{margin-top:.6rem;font-weight:400;font-size:.98rem;color:var(--ink-soft)}
-
-  /* ---------- code snippets ---------- */
-  .snippet{margin:1.8rem 0 0;background:var(--board);color:#D9E2DD;font-family:var(--mono);
-    font-size:.8rem;line-height:1.65;padding:1.15rem 1.35rem;overflow-x:auto;white-space:pre}
-  .snippet .c{color:#6F847B}
-  .snippet .k{color:var(--amber)}
-  .snippet-src{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);margin:.5rem 0 0}
-
-  /* ---------- figures ---------- */
-  figure{margin:2rem 0 0;padding:0}
-  figure img{max-width:100%;height:auto;display:block;background:#fff;box-shadow:0 1px 0 var(--rule)}
-  figcaption{font-family:var(--mono);font-size:.76rem;line-height:1.6;color:var(--ink-soft);margin-top:.7rem;max-width:70ch}
-  figcaption b{color:var(--ink)}
-
-  /* ---------- bars ---------- */
-  .bars{margin:2rem 0 .6rem;display:grid;gap:1.5rem}
-  .bar-group{display:grid;grid-template-columns:6.2rem 1fr;gap:.9rem;align-items:center}
-  .bar-group .pair{font-family:var(--mono);font-weight:600;font-size:.86rem;letter-spacing:.06em}
-  .bar-lines{display:grid;gap:.42rem}
-  .bar-line{display:grid;grid-template-columns:1fr 4.6rem;gap:.7rem;align-items:center}
-  .track{height:1.5rem;background:rgba(22,33,29,.07);position:relative}
-  .fill{height:100%;display:block}
-  .fill.old{background:var(--rule-strong)}
-  .fill.new{background:var(--up)}
-  .fill.wide{background:var(--down)}
-  .bar-line .val{font-family:var(--mono);font-size:.8rem;color:var(--ink-soft)}
-  .bar-line .val b{color:var(--ink);font-weight:600}
-  .legend{font-family:var(--mono);font-size:.74rem;color:var(--ink-soft);letter-spacing:.04em;margin-top:.4rem}
-  .legend i{display:inline-block;width:.7rem;height:.7rem;margin-right:.35rem;vertical-align:-1px;font-style:normal}
-  .legend .a{background:var(--rule-strong)}
-  .legend .b{background:var(--up)}
-  .legend .c{background:var(--down)}
-  .caption{font-family:var(--mono);font-size:.76rem;line-height:1.55;color:var(--ink-soft);max-width:66ch;margin:.9rem 0 0}
-
-  /* ---------- tables ---------- */
-  .scroller{overflow-x:auto;margin:1.8rem 0 0;-webkit-overflow-scrolling:touch}
-  table{border-collapse:collapse;width:100%;min-width:34rem;font-family:var(--mono);font-size:.82rem}
-  caption{text-align:left;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:.7rem}
-  th,td{text-align:left;padding:.6rem .8rem .6rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
-  thead th{border-bottom:1.5px solid var(--ink);font-weight:600;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
-  td.num,th.num{text-align:right;padding-right:1.2rem}
-  tbody th{font-weight:600;white-space:nowrap}
-  .best{color:var(--up);font-weight:600}
-  .worse{color:var(--down)}
-  tr.group-end td,tr.group-end th{border-bottom:1.5px solid var(--rule-strong)}
-  td.note{font-family:var(--body);font-size:.92rem;line-height:1.5;color:var(--ink-soft);padding-right:0}
-
-  /* ---------- cards ---------- */
-  .grid3{display:grid;gap:1.6rem;margin-top:2rem}
-  @media(min-width:52rem){.grid3{grid-template-columns:repeat(3,1fr);gap:2rem}}
-  .card{border-top:2px solid var(--ink);padding-top:.9rem}
-  .card .tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:.55rem}
-  .card p{font-size:.98rem;margin:0}
-  .card.no{border-top-color:var(--down)}
-  .card.yes{border-top-color:var(--up)}
-  .card.flat{border-top-color:var(--ink-soft)}
-
-  .method{display:grid;gap:1.3rem}
-  @media(min-width:46rem){.method{grid-template-columns:repeat(2,1fr);gap:1.3rem 2.4rem}}
-  .method div{border-top:1px solid var(--rule);padding-top:.75rem}
-  .method p{font-size:.95rem;margin:0;color:var(--ink-soft)}
-  .method h3{margin-bottom:.25rem}
-
-  ul.plain{margin:1.2rem 0 0;padding:0;list-style:none;max-width:62ch}
-  ul.plain li{padding:.55rem 0 .55rem 1.4rem;border-bottom:1px solid var(--rule);position:relative;font-size:.98rem}
-  ul.plain li::before{content:"-";position:absolute;left:0;color:var(--ink-soft);font-family:var(--mono)}
-
-  /* ---------- appendix ---------- */
-  .appendix-block{margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--rule)}
-  .appendix-block > h3{font-family:var(--display);font-weight:800;font-size:clamp(1.1rem,1rem + .5vw,1.4rem);letter-spacing:-.015em;margin:0 0 .5rem}
-  .appendix-block > p{font-size:.98rem;color:var(--ink-soft)}
-
-  footer{padding:2.6rem 0 3.4rem;font-family:var(--mono);font-size:.78rem;line-height:1.7;color:var(--ink-soft)}
-  footer p{max-width:72ch}
-
-  /* ---------- centered article column, wide data breakouts ---------- */
-  .wrap>:not(.rows,.scroller,figure,.bars,.snippet,.snippet-src,.caption,.grid3,.method,.action,.appendix-block){max-width:min(36rem,100%);margin-inline:auto}
-  .wrap>.action{max-width:min(44rem,100%);margin-inline:auto}
-  .wrap>.snippet,.wrap>.snippet-src{max-width:min(48rem,100%);margin-inline:auto}
-  figure img,figcaption{margin-inline:auto}
-  .appendix-block>:not(.scroller,.caption){max-width:min(36rem,100%);margin-inline:auto}
-
-  /* ---------- collapsed appendix ---------- */
-  .wrap>.appendix-details{max-width:none}
-  .appendix-details>summary{cursor:pointer;list-style:none}
-  .appendix-details>summary::-webkit-details-marker{display:none}
-  .appendix-details>summary>*{max-width:min(36rem,100%);margin-inline:auto}
-  .appendix-toggle{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--up);margin-top:.2rem}
-  .appendix-toggle::after{content:"+ Expand the appendix"}
-  .appendix-details[open] .appendix-toggle::after{content:"- Collapse the appendix"}
-  .appendix-details>summary:hover .appendix-toggle{text-decoration:underline;text-underline-offset:.18em}
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  * { box-sizing: border-box; }
+  body { background: #F0EFE9; color: #16211D; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+  a:hover { color: #1E7A50; }
+  a:focus-visible { outline: 2px solid #D0A03C; outline-offset: 3px; }
+  summary::-webkit-details-marker { display: none; }
 </style>
 </head>
 <body>
 
-<header class="board">
-  <div class="wrap">
-    <p class="eyebrow">Case study &middot; Currency forecasting</p>
-    <h1>Which currency questions are actually answerable?</h1>
-    <p class="standfirst">
-      Ten years of daily prices for the euro, the yen and the rupee against the dollar. Three different questions
-      asked of the same data, every answer graded against a stated simple guess. <strong>Two of the three questions turned
-      out to be dead ends. The third improves a rate that gets set every month.</strong>
-    </p>
-    <div class="rows">
-      <div class="row"><span class="n row-anim">01</span>
-        <span class="q row-anim">Which way will the rate move next?<span>Direction - next day, week or month</span></span>
-        <span class="verdict no row-anim">Couldn&#x27;t beat guessing</span></div>
-      <div class="row"><span class="n row-anim">02</span>
-        <span class="q row-anim">How rough will next week be?<span>Volatility - the size of the moves</span></span>
-        <span class="verdict yes row-anim">Error halved</span></div>
-      <div class="row"><span class="n row-anim">03</span>
-        <span class="q row-anim">What rate should we plan next month around?<span>Next month's average rate</span></span>
-        <span class="verdict win row-anim">16-28% more accurate</span></div>
-    </div>
-  </div>
-</header>
+<div style="background: #F0EFE9; color: #16211D; font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: clamp(1rem, .96rem + .2vw, 1.115rem); line-height: 1.62; font-variant-numeric: tabular-nums;">
 
-<!-- ============ DATA + THE BUG ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">What goes in</p>
-    <h2>Free public data - and the bug that nearly fooled us</h2>
-    <p class="lede">
-      Nothing here is proprietary or paid. Daily prices come from Yahoo Finance (2015 onward), interest rates and
-      inflation from FRED (the US Federal Reserve's public database), weekly positions of large trading funds from a
-      US regulator, and the Fed's own policy statements. That is deliberate: it shows what currency forecasting
-      can deliver before anyone spends money on data.
-    </p>
+  <header style="background: #0E1B18; color: #EAEFEC; padding: clamp(2.4rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #D0A03C; margin: 0 0 1.4rem;"><a href="/lab" style="text-decoration: none; color: #6F847B;">jatinhans.com / lab</a> &nbsp;&middot;&nbsp; Case study &middot; Currency forecasting</p>
+      <h1 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(2.1rem, 1.2rem + 4.2vw, 4.05rem); line-height: 1.02; letter-spacing: -.025em; margin: 0 0 1.1rem; max-width: 19ch;">Which currency questions are actually answerable?</h1>
+      <p style="margin: 0 0 1.1rem; color: #B9C6BF; font-size: clamp(1.02rem, .98rem + .25vw, 1.2rem);">Ten years of daily prices for the euro, the yen and the rupee against the dollar. Three questions, the same data, every answer scored against a simple guess I named first. <strong style="color: #EAEFEC; font-weight: 600;">Two of the three were dead ends. The third fixes a number companies set every month.</strong></p>
+      <p style="margin: 0 0 clamp(2.2rem, 5vw, 3.2rem); font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .76rem; line-height: 1.7; color: #6F847B;">Every input is lagged one trading day and matched to its question&rsquo;s frequency. Models are scored only on data they never saw. Method in &sect;07, sources in the appendix.</p>
 
-    <div class="scroller">
-      <table>
-        <caption>Inputs, sources and coverage</caption>
-        <thead>
-          <tr><th scope="col">Input</th><th scope="col">What it captures</th><th scope="col">Source</th><th scope="col">Coverage</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Daily prices</th><td class="note">Closing price for each pair, back to 2015 (the first year is used to warm up the calculations)</td><td>Yahoo Finance</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Recent moves &amp; momentum</th><td class="note">The last move plus how far the price travelled over 1, 3, 6 and 12 months</td><td>Derived</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Choppiness, 3 windows</th><td class="note">How much the price has been jumping around - over short, medium and long windows of past days</td><td>Derived</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Market backdrop</th><td class="note">Moves in the dollar index (one number tracking the dollar against a basket of currencies) and the VIX, a widely used market-nervousness gauge</td><td>Yahoo Finance</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Interest-rate gap</th><td class="note">The difference between what each currency earns in interest</td><td>FRED</td><td>All 3 pairs</td></tr>
-          <tr><th scope="row">Fund positioning</th><td class="note">Whether large funds are betting for or against the euro and the yen, reported weekly</td><td>CFTC</td><td class="worse">No rupee version exists</td></tr>
-          <tr class="group-end"><th scope="row">Policy language</th><td class="note">99 statements from the Fed's rate-setting committee, scored from hawkish to dovish</td><td>US Federal Reserve</td><td class="worse">Dollar side only</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="caption">
-      Coverage gaps are stated rather than papered over: no rupee version of the fund-positioning data exists, so USDINR sits that input out, and only the Fed's statements were machine-readable, so policy language covers the dollar
-      side only.
-    </p>
 
-    <h3 style="margin-top:2.6rem">The timestamp bug</h3>
-    <p>
-      Early on, one model looked 70% accurate at predicting the next day - implausibly good. The cause turned
-      out to be a timestamp mismatch: Yahoo stamps its currency prices earlier in the day than it stamps the dollar
-      index. Join the two on the same date, and &ldquo;today's&rdquo; dollar move secretly contains information about
-      <em>tomorrow's</em> euro move. The model wasn't smart; it was peeking.
-    </p>
-    <p>
-      The check that caught it uses correlation - a score from &minus;1 to +1 where near 0 means &ldquo;no
-      connection&rdquo; and near &minus;1 or +1 means &ldquo;strongly connected&rdquo;:
-    </p>
-<div class="snippet">eur = log(closes["EURUSD"]).diff()          <span class="c"># the euro's daily moves</span>
-dxy = log(closes["DXY"]).diff()             <span class="c"># the dollar index's daily moves</span>
-
-corr(dxy, eur)             <span class="c">#  -0.09  -> no connection, as expected</span>
-corr(dxy, eur.shift(-1))   <span class="c">#  -0.87  -> strongly connected to TOMORROW's move = a leak</span>
-
-<span class="c"># fix: lag the index series one day, so a model only ever sees</span>
-<span class="c"># values that existed before the price it predicts from</span>
-dxy = closes["DXY"].shift(1)</div>
-    <p class="snippet-src">From notebooks/01_direction.ipynb, section 1</p>
-    <p style="margin-top:1.05rem">
-      After the one-day shift, the 70% &ldquo;accuracy&rdquo; collapsed to ordinary guessing. Every number on this
-      page comes from the fixed data - and finding this bug is, honestly, the most transferable result of the
-      whole project: <strong>when a forecast looks too good for its field, audit the timestamps first.</strong>
-    </p>
-
-    <div class="grid3">
-      <div class="card">
-        <span class="tag">Guard 1</span>
-        <h3>One-day lag on everything</h3>
-        <p>Every input is shifted one trading day, so a model only ever sees values published before the price it is
-        predicting from. Enforced in code, not by convention.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Guard 2</span>
-        <h3>Frequency matched to the question</h3>
-        <p>Daily data predicts the next day, weekly data the next week, monthly the next month. Mixing frequencies is
-        where accidental peeking usually creeps in.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Guard 3</span>
-        <h3>Tested only on unseen data</h3>
-        <p>Models slide forward through time, re-trained at each date, and are always scored on data they have never seen
-        - the way real forecasting works.</p>
+      <div style="border-top: 1px solid rgba(234,239,236,.22);">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.4rem; padding: 1.15rem 0; border-bottom: 1px solid rgba(234,239,236,.14);">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .78rem; color: #6F847B; flex: 0 0 2.2rem;">Q1</span>
+          <span style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: clamp(1.02rem, .95rem + .4vw, 1.35rem); letter-spacing: -.01em; flex: 1 1 16rem;">Which way will the rate move next?<span style="display: block; font-family: 'Source Serif 4', Georgia, serif; font-weight: 400; font-size: .9rem; color: #93A49C; letter-spacing: 0; margin-top: .15rem;">Direction, next day, week or month</span></span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: clamp(.72rem, .66rem + .3vw, .86rem); letter-spacing: .11em; text-transform: uppercase; color: #D98A80; flex: 0 1 auto; min-width: 9.5rem; text-align: right; margin-left: auto;">No better than guessing</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.4rem; padding: 1.15rem 0; border-bottom: 1px solid rgba(234,239,236,.14);">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .78rem; color: #6F847B; flex: 0 0 2.2rem;">Q2</span>
+          <span style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: clamp(1.02rem, .95rem + .4vw, 1.35rem); letter-spacing: -.01em; flex: 1 1 16rem;">How rough will next week be?<span style="display: block; font-family: 'Source Serif 4', Georgia, serif; font-weight: 400; font-size: .9rem; color: #93A49C; letter-spacing: 0; margin-top: .15rem;">Roughness, the size of the moves</span></span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: clamp(.72rem, .66rem + .3vw, .86rem); letter-spacing: .11em; text-transform: uppercase; color: #6FC79A; flex: 0 1 auto; min-width: 9.5rem; text-align: right; margin-left: auto;">51-57% less error</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.4rem; padding: 1.15rem 0; border-bottom: 1px solid rgba(234,239,236,.14);">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .78rem; color: #6F847B; flex: 0 0 2.2rem;">Q3</span>
+          <span style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: clamp(1.02rem, .95rem + .4vw, 1.35rem); letter-spacing: -.01em; flex: 1 1 16rem;">What rate should we plan next month around?<span style="display: block; font-family: 'Source Serif 4', Georgia, serif; font-weight: 400; font-size: .9rem; color: #93A49C; letter-spacing: 0; margin-top: .15rem;">Next month&rsquo;s average rate</span></span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: clamp(.72rem, .66rem + .3vw, .86rem); letter-spacing: .11em; text-transform: uppercase; color: #6FC79A; flex: 0 1 auto; min-width: 9.5rem; text-align: right; margin-left: auto;">16-28% less error</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ============ THE ONE CHART ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">The shape of the problem</p>
-    <h2>One chart that predicts the whole study</h2>
-    <p class="lede">
-      Before building any model, ask the price history a simple question: <em>&ldquo;does what happened in the last
-      few days tell you anything about today?&rdquo;</em> Ask it twice - once about the <strong>direction</strong>
-      of moves, once about their <strong>size</strong>.
-    </p>
-    <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/autocorrelation.png" width="1081" height="296"
-           alt="Bar chart per pair: blue bars near zero for direction, orange bars clearly positive for size" loading="lazy">
-      <figcaption>
-        <b>How to read it:</b> each bar is &ldquo;how much does knowing what happened N days ago help?&rdquo; -
-        zero means not at all. &ldquo;lag&rdquo; = how many days back you look, &ldquo;autocorr&rdquo; = the bar height.
-      </figcaption>
-    </figure>
-    <p style="margin-top:1.4rem">
-      The blue bars sit at zero on every pair: yesterday's direction tells you nothing about today's. (One blue bar
-      on the rupee panel dips below zero - the rupee tends to give back a little the day after a move -
-      but it is too small and short-lived to build on, and the models later confirmed that.) The orange bars are
-      clearly positive everywhere: wild days follow wild days, calm days follow calm days.
-    </p>
-    <p>
-      In plain terms: <strong>the market hides which way it will move, but telegraphs how rough the ride will
-      be.</strong> That one difference decides all three verdicts below.
-    </p>
-  </div>
-</section>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;01 &middot; The shape of the problem</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">The market hides which way it will move. It telegraphs how rough the ride will be.</h2>
+      <p style="font-size: clamp(1.05rem, 1rem + .3vw, 1.22rem); margin: 0 0 1.05rem;">Before building anything, ask the price history one question: does what happened over the last few days tell you anything about today? Ask it twice. Once about the <strong>direction</strong> of moves, once about their <strong>size</strong>.</p>
 
-<!-- ============ OUTCOME 1: PLANNING RATE ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">Outcome 01 &middot; the usable one</p>
-    <h2>Plan next month around today's rate, not last month's average</h2>
-    <p class="lede">
-      Businesses constantly need one exchange rate agreed in advance - a budgeting rate, a pricing rate, a rate
-      written into a contract. What that number is really trying to guess is <em>next month's average rate</em>, and
-      it is rarely tested as its own question.
-    </p>
-    <p>
-      We compared three ways of setting it, at every month-end across 104 months (2017-2026). The score is
-      simple: on average, how far off was the guess, as a percentage of the average that actually happened? Smaller
-      is better.
-    </p>
+      <figure style="margin: 2rem 0 0; padding: 0;"><div style="background: #fff; box-shadow: 0 1px 0 rgba(22,33,29,.14); padding: 1.25rem; display: flex; align-items: center; justify-content: center;">
+        <img src="/lab/figures/autocorrelation.png" width="1081" height="296" alt="Bar chart per pair: blue bars near zero for direction, orange bars clearly positive for size" loading="lazy" style="max-width: 100%; height: auto; display: block; margin-inline: auto;" /></div>
+        <figcaption style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .76rem; line-height: 1.6; color: #5A6862; margin-top: .7rem;"><b style="color: #16211D;">How to read it.</b> Each bar answers one question: how much does knowing what happened N days ago help? Zero means not at all. &ldquo;lag&rdquo; = how many days back you look, &ldquo;autocorr&rdquo; = the bar height.<br /><span style="color: #5A6862;">Source: notebooks/01_direction.ipynb</span></figcaption>
+      </figure>
 
-    <div class="scroller">
-      <table>
-        <caption>Average miss per guessing method - 104 months per pair, lower is better</caption>
-        <thead>
-          <tr>
-            <th scope="col">Pair</th>
-            <th scope="col" class="num">A &middot; reuse last month's average</th>
-            <th scope="col" class="num">B &middot; use today's rate</th>
-            <th scope="col" class="num">C &middot; small statistical model</th>
-            <th scope="col" class="num">B vs A</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">EURUSD</th><td class="num">off by 1.21%</td><td class="num best">off by 1.01%</td><td class="num">off by 1.03%</td><td class="num best">16% less error</td></tr>
-          <tr><th scope="row">USDINR</th><td class="num">off by 0.90%</td><td class="num">off by 0.66%</td><td class="num best">off by 0.65%</td><td class="num best">28% less error</td></tr>
-          <tr><th scope="row">USDJPY</th><td class="num">off by 1.51%</td><td class="num best">off by 1.13%</td><td class="num">off by 1.14%</td><td class="num best">25% less error</td></tr>
-        </tbody>
-      </table>
+      <p style="margin: 1.4rem 0 1.05rem;">The blue bars sit at zero on every pair. Yesterday&rsquo;s direction tells you nothing about today&rsquo;s. One bar on the rupee panel does dip below zero, since the rupee tends to give back a little the day after a move, but it is too small and too short-lived to build on. The models confirmed that later. The orange bars run clearly positive everywhere: wild days follow wild days, calm days follow calm days.</p>
+      <p style="margin: 0;">That single difference decides all three verdicts below. <strong>Q1 has no answer in this data. Q2 and Q3 do.</strong></p>
     </div>
+  </section>
 
-    <div class="bars">
-      <div class="bar-group"><span class="pair">EURUSD</span>
-        <div class="bar-lines">
-          <div class="bar-line"><span class="track"><span class="fill old" style="width:80.1%"></span></span><span class="val">1.21%</span></div>
-          <div class="bar-line"><span class="track"><span class="fill new" style="width:66.9%"></span></span><span class="val"><b>1.01%</b></span></div>
-        </div></div>
-      <div class="bar-group"><span class="pair">USDINR</span>
-        <div class="bar-lines">
-          <div class="bar-line"><span class="track"><span class="fill old" style="width:59.6%"></span></span><span class="val">0.90%</span></div>
-          <div class="bar-line"><span class="track"><span class="fill new" style="width:43.7%"></span></span><span class="val"><b>0.66%</b></span></div>
-        </div></div>
-      <div class="bar-group"><span class="pair">USDJPY</span>
-        <div class="bar-lines">
-          <div class="bar-line"><span class="track"><span class="fill old" style="width:100%"></span></span><span class="val">1.51%</span></div>
-          <div class="bar-line"><span class="track"><span class="fill new" style="width:74.8%"></span></span><span class="val"><b>1.13%</b></span></div>
-        </div></div>
-      <p class="legend"><i class="a"></i>A &middot; last month's average &nbsp;&nbsp; <i class="b"></i>B &middot; today's rate &nbsp;&middot;&nbsp; average miss, lower is better</p>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;02 &middot; Q3 &middot; Planning rate</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">Plan next month around today&rsquo;s rate, not last month&rsquo;s average</h2>
+      <p style="font-size: clamp(1.05rem, 1rem + .3vw, 1.22rem); margin: 0 0 1.05rem;">Businesses need one exchange rate agreed in advance: a budgeting rate, a pricing rate, or a rate written into a contract. What that number is really guessing at is <em>next month&rsquo;s average rate</em>. Almost nobody tests it as its own question.</p>
+      <p style="margin: 0 0 1.05rem;">We compared three ways of setting it at every month-end across 104 months, 2017 to 2026. Score it by asking how far off the guess was, on average, as a percentage of the average that actually happened. Smaller is better.</p>
+
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; margin: 2rem 0 .9rem;">Average miss, %. 104 months per pair, lower is better</p>
+      <div style="display: grid; gap: 1.5rem;">
+          <div style="display: grid; grid-template-columns: 6.2rem 1fr; gap: .9rem; align-items: center;">
+            <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: .86rem; letter-spacing: .06em;">EURUSD</span>
+            <div style="display: grid; gap: .42rem;">
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 80.1%; background: rgba(22,33,29,.32);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">1.21</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 66.9%; background: #1E7A50;"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #16211D; font-weight: 600;">1.01</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 68.2%; background: rgba(30,122,80,.45);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">1.03</span>
+                </div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 6.2rem 1fr; gap: .9rem; align-items: center;">
+            <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: .86rem; letter-spacing: .06em;">USDINR</span>
+            <div style="display: grid; gap: .42rem;">
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 59.6%; background: rgba(22,33,29,.32);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">0.90</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 43.7%; background: #1E7A50;"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">0.66</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 43.0%; background: rgba(30,122,80,.45);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #16211D; font-weight: 600;">0.65</span>
+                </div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 6.2rem 1fr; gap: .9rem; align-items: center;">
+            <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-weight: 600; font-size: .86rem; letter-spacing: .06em;">USDJPY</span>
+            <div style="display: grid; gap: .42rem;">
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 100.0%; background: rgba(22,33,29,.32);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">1.51</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 74.8%; background: #1E7A50;"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #16211D; font-weight: 600;">1.13</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 4.6rem; gap: .7rem; align-items: center;">
+                  <span style="height: 1.5rem; background: rgba(22,33,29,.07); position: relative; display: block;"><span style="height: 100%; display: block; width: 75.5%; background: rgba(30,122,80,.45);"></span></span>
+                  <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; color: #5A6862; font-weight: 400;">1.14</span>
+                </div>
+            </div>
+          </div>
+      </div>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .74rem; color: #5A6862; letter-spacing: .04em; margin: .8rem 0 0; display: flex; flex-wrap: wrap; gap: .3rem 1.2rem;">
+        <span><i style="display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -1px; background: rgba(22,33,29,.32);"></i>A &middot; last month&rsquo;s average</span>
+        <span><i style="display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -1px; background: #1E7A50;"></i>B &middot; today&rsquo;s rate</span>
+        <span><i style="display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -1px; background: rgba(30,122,80,.45);"></i>C &middot; small statistical model</span>
+      </p>
+
+      <p style="margin: 1.8rem 0 1.05rem;">Guess C, the statistical model, ties guess B on every pair. <strong>The win comes from a better starting point. The modelling adds nothing.</strong> The whole test fits in a few lines: at each month-end, record what each method would have guessed, then compare it with the average that actually happened.</p>
+
+      <div style="margin: 1.8rem 0 0; background: #0E1B18; color: #D9E2DD; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; line-height: 1.65; padding: 1.15rem 1.35rem; overflow-x: auto; white-space: pre;"><span style="color: #D0A03C;">for</span> each month_end:
+    guess_a = average(prices, last_month)          <span style="color: #6F847B;"># the common habit</span>
+    guess_b = price_today                          <span style="color: #6F847B;"># just today's rate</span>
+    guess_c = ar_model(recent_moves).forecast()    <span style="color: #6F847B;"># continue recent behaviour</span>
+    actual  = average(prices, next_month)          <span style="color: #6F847B;"># known a month later</span>
+    record(percent_miss(guess, actual) <span style="color: #D0A03C;">for</span> each guess)</div>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .5rem 0 0;">Source: scripts/14_period_average.py, condensed</p>
+
+      <div style="margin: 2rem 0 0; padding: 1.35rem 1.5rem; background: #fff; border-left: 4px solid #D0A03C; box-shadow: 0 1px 0 rgba(22,33,29,.14);">
+        <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: #5A6862; display: block; margin-bottom: .4rem;">The operational change</span>
+        <p style="margin: 0; font-size: 1.08rem; font-weight: 600;">At each month-end, set the planning rate from today&rsquo;s rate instead of last month&rsquo;s average.</p>
+        <p style="margin-top: .6rem; margin-bottom: 0; font-weight: 400; font-size: .98rem; color: #5A6862;">No model to deploy and no data to buy. It held on all three pairs tested.</p>
+      </div>
     </div>
+  </section>
 
-    <p style="margin-top:1.6rem">
-      The whole test fits in a few lines - at each month-end, record what each method would have guessed, then
-      compare with the average that actually happened:
-    </p>
-<div class="snippet"><span class="k">for</span> each month_end:
-    guess_a = average(prices, last_month)          <span class="c"># the common habit</span>
-    guess_b = price_today                          <span class="c"># just today's rate</span>
-    guess_c = ar_model(recent_moves).forecast()    <span class="c"># continue recent behaviour forward</span>
-    actual  = average(prices, next_month)          <span class="c"># known a month later</span>
-    record(percent_miss(guess, actual) <span class="k">for</span> each guess)</div>
-    <p class="snippet-src">Condensed from scripts/14_period_average.py - full version in the repo</p>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;03 &middot; Q2 &middot; Roughness</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">Size is forecastable where direction is not</h2>
+      <p style="font-size: clamp(1.05rem, 1rem + .3vw, 1.22rem); margin: 0 0 1.05rem;">&ldquo;Volatility&rdquo; just means how much the price jumps around. A calm week versus a wild one. Knowing next week will be wild says nothing about which way prices go, but it does tell a business how much safety margin to leave.</p>
+      <p style="margin: 0 0 1.05rem;">Two forecasters raced each other one week ahead, over 426 separate weeks per pair. The <strong>do-nothing guess</strong> assumes next week is as wild as the recent past. The <strong>volatility model</strong> is a textbook recipe called HAR. It blends yesterday&rsquo;s choppiness with last week&rsquo;s and last month&rsquo;s, weighting each by what has worked historically.</p>
 
-    <p style="margin-top:1.4rem">
-      Guess C - the statistical model - ties guess B everywhere. That is the punchline: <strong>the win
-      comes from picking a better starting point, not from modelling.</strong>
-    </p>
-
-    <div class="action">
-      <span class="lbl">The operational change</span>
-      <p>At each month-end, set the planning rate from today&#x27;s rate instead of last month&#x27;s average.</p>
-      <p>No model to deploy, no data to buy - and it held on all three pairs tested.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ OUTCOME 2: VOLATILITY ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">Outcome 02 &middot; the forecastable one</p>
-    <h2>Size is predictable where direction is not</h2>
-    <p class="lede">
-      &ldquo;Volatility&rdquo; just means how much the price jumps around - a calm week versus a wild one.
-      Knowing next week will be wild doesn't say which way prices go, but it tells a business how much safety margin
-      to leave: buy protection sooner, charge a bigger buffer, put less money at stake that week.
-    </p>
-    <p>
-      Two forecasters were compared one week ahead, on 426 separate weeks per pair. The <strong>do-nothing
-      guess</strong>: assume next week is as wild as the recent past. The <strong>volatility model</strong>: a
-      standard statistics-textbook recipe (called HAR) that blends yesterday's, last week's and last month's
-      choppiness into one forecast - a weighted average whose weights are learned from history:
-    </p>
-<div class="snippet"><span class="c"># three views of recent choppiness ...</span>
-vol_yesterday = abs(move_yesterday)
-vol_last_week = typical_move(last_5_days)
+      <div style="margin: 1.8rem 0 0; background: #0E1B18; color: #D9E2DD; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; line-height: 1.65; padding: 1.15rem 1.35rem; overflow-x: auto; white-space: pre;"><span style="color: #6F847B;"># three views of recent choppiness ...</span>
+vol_yesterday  = abs(move_yesterday)
+vol_last_week  = typical_move(last_5_days)
 vol_last_month = typical_move(last_21_days)
 
-<span class="c"># ... blended into one forecast, weights learned from history</span>
+<span style="color: #6F847B;"># ... blended into one forecast, weights learned from history</span>
 next_week_vol = w1*vol_yesterday + w2*vol_last_week + w3*vol_last_month</div>
-    <p class="snippet-src">The HAR recipe, condensed from scripts/10_turbulence_har.py</p>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .5rem 0 0;">Source: scripts/10_turbulence_har.py, condensed</p>
 
-    <p style="margin-top:1.4rem">
-      Result: <strong>the model cuts the forecast error roughly in half on every pair</strong> - 51-57%
-      less error, measured by the scoring rule statisticians use for volatility forecasts (it punishes under-warning
-      about a storm more than over-warning about one).
-    </p>
+      <p style="margin: 1.4rem 0 1.05rem;"><strong>The model cuts forecast error roughly in half on every pair</strong>, 51-57% less, measured by the scoring rule statisticians use for volatility forecasts. That rule punishes under-warning about a storm harder than over-warning about one.</p>
 
-    <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/har_forecast_eurusd.png" width="934" height="334"
-           alt="Line chart: realised weekly volatility in gray, the model's week-earlier forecast in blue, tracking each other" loading="lazy">
-      <figcaption>
-        <b>How to read it:</b> the gray line is how wild each week of EURUSD <em>actually</em> turned out to be; the
-        blue line is what the model <em>predicted one week earlier</em>. The forecast is useful because the two lines
-        track each other - the model sees the storms coming, at least roughly. The vertical axis
-        (&ldquo;annualised %&rdquo;) is just the roughness scale: higher = wilder.
-      </figcaption>
-    </figure>
+      <figure style="margin: 2rem 0 0; padding: 0;"><div style="background: #fff; box-shadow: 0 1px 0 rgba(22,33,29,.14); padding: 1.25rem; display: flex; align-items: center; justify-content: center;">
+        <img src="/lab/figures/har_forecast_eurusd.png" width="934" height="334" alt="Line chart: realised weekly volatility in gray, the model's week-earlier forecast in blue, tracking each other" loading="lazy" style="max-width: 100%; height: auto; display: block; margin-inline: auto;" /></div>
+        <figcaption style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .76rem; line-height: 1.6; color: #5A6862; margin-top: .7rem;"><b style="color: #16211D;">How to read it.</b> The gray line is how wild each week of EURUSD actually turned out to be. The blue line is what the model predicted a week earlier. The forecast earns its keep because the two track each other. The vertical axis (&ldquo;annualised %&rdquo;) is the roughness scale: higher = wilder.<br /><span>Source: scripts/10_turbulence_har.py</span></figcaption>
+      </figure>
 
-    <div class="scroller">
-      <table>
-        <caption>Next-week forecast error - 426 weeks per pair, lower is better</caption>
-        <thead>
-          <tr>
-            <th scope="col">Pair</th><th scope="col">Forecaster</th>
-            <th scope="col" class="num">Error score</th><th scope="col" class="num">vs the do-nothing guess</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row" rowspan="3">EURUSD</th><td>Do-nothing guess</td><td class="num">0.84</td><td class="num">-</td></tr>
-          <tr><td>Volatility model (HAR)</td><td class="num best">0.36</td><td class="num best">57% less error</td></tr>
-          <tr class="group-end"><td>HAR + machine learning</td><td class="num worse">0.42</td><td class="num worse">worse than HAR alone</td></tr>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; margin: 2rem 0 .7rem;">Next-week forecast error. 426 weeks per pair, lower is better</p>
+      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Pair</th>
+              <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Forecaster</th>
+              <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Error score</th>
+              <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">vs do-nothing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">EURUSD</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.84</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #5A6862;">baseline</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.36</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">57% less error</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #B5372B;">0.42</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #B5372B;">worse than HAR alone</td></tr>
+            <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">USDINR</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.72</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #5A6862;">baseline</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.84</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">51% less error</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #B5372B;">0.99</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #B5372B;">worse than HAR alone</td></tr>
+            <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">USDJPY</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.13</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #5A6862;">baseline</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.55</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">51% less error</td></tr>
+            <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #B5372B;">0.66</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #B5372B;">worse than HAR alone</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .7rem 0 0;">Error score is the volatility scoring rule described above. Units matter only for comparison. Monthly results in A.3.</p>
 
-          <tr><th scope="row" rowspan="3">USDINR</th><td>Do-nothing guess</td><td class="num">1.72</td><td class="num">-</td></tr>
-          <tr><td>Volatility model (HAR)</td><td class="num best">0.84</td><td class="num best">51% less error</td></tr>
-          <tr class="group-end"><td>HAR + machine learning</td><td class="num worse">0.99</td><td class="num worse">worse than HAR alone</td></tr>
-
-          <tr><th scope="row" rowspan="3">USDJPY</th><td>Do-nothing guess</td><td class="num">1.13</td><td class="num">-</td></tr>
-          <tr><td>Volatility model (HAR)</td><td class="num best">0.55</td><td class="num best">51% less error</td></tr>
-          <tr><td>HAR + machine learning</td><td class="num worse">0.66</td><td class="num worse">worse than HAR alone</td></tr>
-        </tbody>
-      </table>
+      <p style="margin: 1.8rem 0 1.05rem;">Look at the third row of every block. Stacking machine learning on top of the simple recipe made forecasts <em>worse</em> every time at this horizon. <strong>The extra complexity cost accuracy and bought nothing.</strong></p>
+      <p style="margin: 0;">This tells you how much cushion to leave, and nothing about which way the rate moves. In a week forecast to be wild you buy protection sooner and price in a bigger buffer. Put less at stake. In a week forecast calm, run the reverse.</p>
     </div>
-    <p class="caption">
-      Note the third row of every block: stacking machine learning (computer models that hunt for patterns on their
-      own) on top of the simple recipe made forecasts <em>worse</em> every time at this horizon. A horizon is how
-      far ahead the forecast looks - here, one week. The error score is the volatility scoring rule described
-      above; its units only matter for comparison - lower is better. Complexity has to earn its place, and here it did not.
-      Monthly results and a measurement note are in the appendix.
-    </p>
+  </section>
 
-    <div class="action">
-      <span class="lbl">What you would do with it</span>
-      <p>Knowing next week is likely to be rough doesn't tell you which way the rate moves. It tells you how much
-      cushion to leave.</p>
-      <p>In practice: buy protection sooner, price in a bigger buffer, or put less at stake in a week forecast to be
-      wild - and the reverse in a week forecast calm.</p>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;04 &middot; Q1 &middot; Direction</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">Nothing beat &ldquo;the next period repeats the last one&rdquo;</h2>
+      <p style="font-size: clamp(1.05rem, 1rem + .3vw, 1.22rem); margin: 0 0 1.05rem;">Fifteen approaches were graded on direction: classic trading rules, statistical models, machine-learning models, and combinations of all three. Every one raced the laziest guess available. <em>Assume the next period does what the last one did.</em></p>
+      <p style="margin: 0 0 1.05rem;">Accuracy is scored out of 100, so &ldquo;+6.4&rdquo; means the best model was right about six more times per 100 guesses than the lazy one. Every advantage here came in smaller than the uncertainty around it. Any of them could be luck.</p>
+
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; margin: 2rem 0 .7rem;">Extra correct guesses per 100 vs lazy guessing. 322 predictions per pair, final unseen test period</p>
+      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Pair</th>
+              <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Extra correct</th>
+              <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Could it just be luck?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">EURUSD</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">+6.4</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; color: #5A6862;">Yes, too close to call</td></tr>
+            <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">USDJPY</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">+1.6</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; color: #5A6862;">Yes, too close to call</td></tr>
+            <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">USDINR</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">+1.4</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; color: #5A6862;">Yes, too close to call</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 2.6rem 0 .35rem;">A model can look fine on accuracy and still be dangerously overconfident</h3>
+      <p style="margin: 0 0 1.05rem;">Some models state a confidence with every guess (&ldquo;70% sure it goes up&rdquo;). We checked whether those confidences are honest: when a model says 70%, is it right about 70% of the time?</p>
+      <figure style="margin: 2rem 0 0; padding: 0;"><div style="background: #fff; box-shadow: 0 1px 0 rgba(22,33,29,.14); padding: 1.25rem; display: flex; align-items: center; justify-content: center;">
+        <img src="/lab/figures/calibration_block6.png" width="534" height="484" alt="Calibration chart: the simple model's dots near the diagonal, the complex model's far from it" loading="lazy" style="max-width: 100%; height: auto; display: block; margin-inline: auto;" /></div>
+        <figcaption style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .76rem; line-height: 1.6; color: #5A6862; margin-top: .7rem;"><b style="color: #16211D;">How to read it.</b> Each dot is a batch of predictions. Left to right is what the model claimed. Up and down is what actually happened. The dashed diagonal is where an honest model&rsquo;s dots would sit. &ldquo;held-out block&rdquo; = the final stretch of data, kept hidden while the models were learning.<br /><span>Source: notebooks/01_direction.ipynb</span></figcaption>
+      </figure>
+      <p style="margin: 1.4rem 0 1.05rem;">Logistic regression sits near the line, so its stated confidence means something. Gradient boosting is far off it. When it claimed &ldquo;90% sure&rdquo; it was right barely half the time. If you act on a stated probability, this chart matters more to you than any accuracy table.</p>
+
+      <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 2.6rem 0 .35rem;">The Fed&rsquo;s words measure cleanly and add nothing</h3>
+      <p style="margin: 0 0 1.05rem;">The second dead end got tested rather than assumed. All 99 FOMC statements were scored hawkish to dovish by counting phrases, a method any reader can check. The scorer passes its sanity check: the 2022-23 rate-hike era reads hawkish, the 2020 emergency cuts read dovish.</p>
+      <figure style="margin: 2rem 0 0; padding: 0;"><div style="background: #fff; box-shadow: 0 1px 0 rgba(22,33,29,.14); padding: 1.25rem; display: flex; align-items: center; justify-content: center;">
+        <img src="/lab/figures/fomc_stance_timeline.png" width="934" height="303" alt="Timeline of Fed statement scores 2015-2026: dovish through 2020, strongly hawkish 2022-23" loading="lazy" style="max-width: 100%; height: auto; display: block; margin-inline: auto;" /></div>
+        <figcaption style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .76rem; line-height: 1.6; color: #5A6862; margin-top: .7rem;"><b style="color: #16211D;">How to read it.</b> Red dots = hawkish statements, green = dovish, gray = neutral. The black line is the average of the last four meetings.<br /><span>Source: scripts/12_stance_score.py &middot; scoring method and full numbers in A.4</span></figcaption>
+      </figure>
+      <p style="margin: 1.4rem 0 0;">Fed into the models across the same 402 weeks, the scores changed nothing. The input was rejected. The experiment stays in the repo as a documented negative, because <strong>a measurement can be valid and still add no forecasting value, and both halves of that are worth publishing.</strong></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ OUTCOME 3: DIRECTION ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">Outcome 03 &middot; the dead ends</p>
-    <h2>Nothing beat &ldquo;the next period repeats the last one&rdquo;</h2>
-    <p class="lede">
-      Fifteen approaches were graded on direction - classic trading rules, statistical models,
-      machine-learning models, and combinations. Every one raced the laziest possible guess: <em>assume the next
-      period does what the last one did.</em>
-    </p>
-    <p>
-      Accuracy is scored out of 100, so &ldquo;+6.4&rdquo; below means the best model was right about 6 more times
-      per 100 guesses than lazy guessing. In every case that advantage was smaller than the uncertainty around it
-      - it could easily be luck:
-    </p>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;05 &middot; The most transferable result</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">When a forecast looks too good for its field, audit the timestamps first</h2>
+      <p style="font-size: clamp(1.05rem, 1rem + .3vw, 1.22rem); margin: 0 0 1.05rem;">Early on, one model looked 70% accurate at predicting the next day. Implausibly good. The cause was a timestamp mismatch: Yahoo stamps its currency prices earlier in the day than it stamps the dollar index. Join the two on the same date and &ldquo;today&rsquo;s&rdquo; dollar move quietly carries information about <em>tomorrow&rsquo;s</em> euro move. The model was peeking.</p>
+      <p style="margin: 0 0 1.05rem;">The check that caught it uses correlation, a score from &minus;1 to +1. Near 0 means no connection. Near &minus;1 or +1 means strongly connected.</p>
 
-    <div class="scroller">
-      <table>
-        <caption>Best model vs lazy guessing - final test period the models never saw, 322 predictions per pair</caption>
-        <thead>
-          <tr><th scope="col">Pair</th><th scope="col" class="num">Extra correct guesses per 100</th><th scope="col">Could it just be luck?</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">EURUSD</th><td class="num">+6.4</td><td class="note">Yes - too close to call</td></tr>
-          <tr><th scope="row">USDJPY</th><td class="num">+1.6</td><td class="note">Yes</td></tr>
-          <tr><th scope="row">USDINR</th><td class="num">+1.4</td><td class="note">Yes</td></tr>
-        </tbody>
-      </table>
+      <div style="margin: 1.8rem 0 0; background: #0E1B18; color: #D9E2DD; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; line-height: 1.65; padding: 1.15rem 1.35rem; overflow-x: auto; white-space: pre;">eur = log(closes["EURUSD"]).diff()          <span style="color: #6F847B;"># the euro's daily moves</span>
+dxy = log(closes["DXY"]).diff()             <span style="color: #6F847B;"># the dollar index's daily moves</span>
+
+corr(dxy, eur)             <span style="color: #6F847B;">#  -0.09  -&gt; no connection, as expected</span>
+corr(dxy, eur.shift(-1))   <span style="color: #6F847B;">#  -0.87  -&gt; connected to TOMORROW's move = a leak</span>
+
+<span style="color: #6F847B;"># fix: lag the index series one day, so a model only ever sees</span>
+<span style="color: #6F847B;"># values that existed before the price it predicts from</span>
+dxy = closes["DXY"].shift(1)</div>
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .5rem 0 0;">Source: notebooks/01_direction.ipynb, section 1</p>
+
+      <p style="margin: 1.4rem 0 0;">After the one-day shift, the 70% &ldquo;accuracy&rdquo; collapsed to ordinary guessing. Every number on this page comes from the fixed data. Of everything in this project, finding that bug is the part most likely to be useful to someone else.</p>
     </div>
+  </section>
 
-    <h3 style="margin-top:2.6rem">The one thing the failure taught</h3>
-    <p>
-      Some models state a confidence with every guess (&ldquo;70% sure it goes up&rdquo;). We checked whether those
-      confidences are honest: when a model says 70%, is it right about 70% of the time?
-    </p>
-    <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/calibration_block6.png" width="534" height="484"
-           alt="Calibration chart: the simple model's dots near the diagonal, the complex model's far from it" loading="lazy">
-      <figcaption>
-        <b>How to read it:</b> each dot is a batch of predictions. Left-right is what the model <em>claimed</em>;
-        up-down is what <em>actually happened</em>; the dashed diagonal is where an honest model's dots would sit.
-        Chart-label translation: &ldquo;P(up)&rdquo; = the model's stated chance the rate goes up;
-        &ldquo;held-out block&rdquo; = the final stretch of data, kept hidden while the models were learning.
-      </figcaption>
-    </figure>
-    <p style="margin-top:1.4rem">
-      The simple model (logistic regression) sits near the line - its confidence means something. The complex
-      one (gradient boosting) is far off it: when it said &ldquo;90% sure&rdquo;, it was right barely half the time.
-      <strong>A model can look fine on accuracy and still be dangerously overconfident - you only see it if
-      you check.</strong> Anyone who acts on a stated probability should care about this chart more than any
-      accuracy table.
-    </p>
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;06 &middot; The close</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">What ten years of public data rules out, and what it supports</h2>
+      <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin-top: 2rem;">
+        <div style="border-top: 2px solid #B5372B; padding-top: .9rem;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; display: block; margin-bottom: .55rem;">What this rules out</span>
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .35rem;">Rate-direction inputs</h3>
+          <p style="font-size: .98rem; margin: 0;">Ten years of public data give no reliable basis for a &ldquo;the rate will move this way next&rdquo; prediction at day, week or month horizons. Worth knowing before it reaches a roadmap.</p>
+        </div>
+        <div style="border-top: 2px solid #1E7A50; padding-top: .9rem;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; display: block; margin-bottom: .55rem;">What this supports</span>
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .35rem;">Roughness-aware planning</h3>
+          <p style="font-size: .98rem; margin: 0;">Forecast the size of the moves and let that set your buffers and your limits. It is the part of the problem public data actually answers.</p>
+        </div>
+        <div style="border-top: 2px solid #5A6862; padding-top: .9rem;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #5A6862; display: block; margin-bottom: .55rem;">What it costs to check</span>
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .35rem;">Free data, open tools</h3>
+          <p style="font-size: .98rem; margin: 0;">Every result here comes from public sources and open-source tooling, and reruns from the repository. Ruling something out this cheaply was worth the time on its own.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h3 style="margin-top:2.6rem">Do the Fed's words help?</h3>
-    <p>
-      The second dead end was tested rather than assumed. The Fed's rate-setting committee (the FOMC) publishes a
-      statement after each meeting; we scored all 99 of them from hawkish (leaning toward higher interest rates) to
-      dovish (leaning toward cuts) with a transparent dictionary method - counting phrases, so any reader can
-      check why a statement scored the way it did:
-    </p>
-<div class="snippet">hawkish_phrases = [<span class="k">"inflation remains elevated"</span>, <span class="k">"tightening"</span>, <span class="k">"restrictive"</span>, ...]
-dovish_phrases  = [<span class="k">"accommodative"</span>, <span class="k">"downside risks"</span>, <span class="k">"cut the target"</span>, ...]
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; margin: 0 0 .8rem;">&sect;07 &middot; How it was tested</p>
+      <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 1rem; max-width: 22ch;">Baselines named before models were built</h2>
+      <div style="display: grid; gap: 1.3rem 2.4rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 1.6rem;">
+        <div style="border-top: 1px solid rgba(22,33,29,.14); padding-top: .75rem;">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .25rem;">A named &ldquo;lazy guess&rdquo; for every question</h3>
+          <p style="font-size: .95rem; margin: 0; color: #5A6862;">Repeat-the-last-period for direction, assume-it-continues for roughness, carry-forward for the planning rate. Beat the lazy guess or it doesn&rsquo;t count. Half of what this study found came from fixing the comparison rather than the model.</p>
+        </div>
+        <div style="border-top: 1px solid rgba(22,33,29,.14); padding-top: .75rem;">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .25rem;">No peeking, enforced in code</h3>
+          <p style="font-size: .95rem; margin: 0; color: #5A6862;">Every input is shifted one trading day. Daily data predicts the next day, weekly the next week, monthly the next month. Models slide forward through time and are scored only on data they have never seen. Mixing frequencies is where accidental peeking usually creeps in.</p>
+        </div>
+        <div style="border-top: 1px solid rgba(22,33,29,.14); padding-top: .75rem;">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .25rem;">Uncertainty stated on every claim</h3>
+          <p style="font-size: .95rem; margin: 0; color: #5A6862;">Every headline number carries a statistical uncertainty range and its sample size. Where the sample is small, I call the result an anecdote.</p>
+        </div>
+        <div style="border-top: 1px solid rgba(22,33,29,.14); padding-top: .75rem;">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .25rem;">Confidence scored, not assumed</h3>
+          <p style="font-size: .95rem; margin: 0; color: #5A6862;">Stated probabilities are graded against reality. Overconfident models get their confidence corrected using data they haven&rsquo;t seen, or are shown as-is with a warning attached.</p>
+        </div>
+        <div style="border-top: 1px solid rgba(22,33,29,.14); padding-top: .75rem;">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; margin: 0 0 .25rem;">Fully reproducible</h3>
+          <p style="font-size: .95rem; margin: 0; color: #5A6862;">Data, pipeline, models and every chart on this page regenerate from the repository. Two notebooks tell the story end to end, and numbered scripts rebuild every table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: clamp(2.8rem, 6vw, 4.6rem) 0; border-bottom: 1px solid rgba(22,33,29,.14);">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <details style="width: 100%;">
+        <summary style="cursor: pointer; list-style: none;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; letter-spacing: .19em; text-transform: uppercase; color: #5A6862; display: block; margin: 0 0 .8rem;">Appendix</span>
+          <h2 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; font-size: clamp(1.55rem, 1.15rem + 1.7vw, 2.5rem); margin: 0 0 .5rem; max-width: 22ch;">Detail, caveats and what sits behind the summary</h2>
+          <span style="display: block; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .78rem; letter-spacing: .08em; color: #5A6862; margin-top: .2rem; text-decoration: underline; text-underline-offset: .2em;">A.1 sources &middot; A.2 planning-rate table &middot; A.3 monthly roughness &middot; A.4 Fed language &middot; A.5 limits &middot; A.6 repository</span>
+        </summary>
+
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.1 - Inputs, sources and coverage</h3>
+          <p style="font-size: .98rem; color: #5A6862; margin: 0 0 1.05rem;">Nothing here is proprietary or paid. That is deliberate: it shows what currency forecasting can deliver before anyone spends money on data. Coverage gaps are stated rather than papered over.</p>
+          <div style="overflow-x: auto;">
+            <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Input</th>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">What it captures</th>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Source</th>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Coverage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Daily prices</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">Closing price for each pair, back to 2015 (the first year warms up the calculations)</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Yahoo Finance</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">All 3 pairs</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Recent moves</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">The last move plus how far the price travelled over 1, 3, 6 and 12 months</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Derived</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">All 3 pairs</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Choppiness</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">How much the price has been jumping around, over short, medium and long windows</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Derived</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">All 3 pairs</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Market backdrop</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">Moves in the dollar index and the VIX, a widely used market-nervousness gauge</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Yahoo Finance</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">All 3 pairs</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Interest-rate gap</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">The difference between what each currency earns in interest</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">FRED</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">All 3 pairs</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">Fund positioning</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">Whether large funds are betting for or against the euro and the yen, reported weekly</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">CFTC</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top; color: #B5372B;">No rupee version exists</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; white-space: nowrap; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); vertical-align: top;">Policy language</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; line-height: 1.5; color: #5A6862;">99 statements from the Fed&rsquo;s rate-setting committee, scored hawkish to dovish</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); vertical-align: top;">US Federal Reserve</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); vertical-align: top; color: #B5372B;">Dollar side only</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.2 - The planning-rate comparison in full</h3>
+          <p style="font-size: .98rem; color: #5A6862; margin: 0 0 1.05rem;">The three methods scored side by side. Guess C ties guess B on every pair, which is why the body section shows the comparison as bars rather than a table.</p>
+          <div style="overflow-x: auto;">
+            <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Pair</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">A &middot; last month&rsquo;s avg</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">B &middot; today&rsquo;s rate</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">C &middot; model</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">B vs A</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">EURUSD</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.21</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">1.01</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.03</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">&minus;16%</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">USDINR</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.90</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.66</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.65</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">&minus;28%</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">USDJPY</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.51</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">1.13</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">1.14</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">&minus;25%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .7rem 0 0;">Average miss as a % of the average that actually happened. 104 months per pair, lower is better.</p>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.3 - Roughness at the monthly horizon</h3>
+          <p style="font-size: .98rem; color: #5A6862; margin: 0 0 1.05rem;">The weekly result is the headline because it is the horizon most decisions run on. The monthly horizon has a smaller sample and a less clean story: the simple model still wins on two pairs, the machine-learning variant narrowly takes the rupee, and all the gaps are smaller.</p>
+          <div style="overflow-x: auto;">
+            <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Pair</th>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Forecaster</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Error score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">EURUSD</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.181</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.153</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #B5372B;">0.219</td></tr>
+                <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">USDINR</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.626</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.488</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid rgba(22,33,29,.32); color: #1E7A50; font-weight: 600;">0.465</td></tr>
+                <tr><th scope="row" rowSpan="3" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); vertical-align: top;">USDJPY</th><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Do-nothing guess</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">0.335</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Volatility model (HAR)</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #1E7A50; font-weight: 600;">0.259</td></tr>
+                <tr><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">HAR + machine learning</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); color: #B5372B;">0.370</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .7rem 0 0;">97 months per pair, same error score as the weekly table, lower is better. One caveat on measurement: roughness is estimated from end-of-day prices. Minute-by-minute data would measure it more precisely and wasn&rsquo;t available, so the claims are kept proportionate to that.</p>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.4 - The Fed-language method and numbers</h3>
+          <p style="font-size: .98rem; color: #5A6862; margin: 0 0 1.05rem;">A transparent dictionary method: count phrases, so any reader can check why a statement scored the way it did.</p>
+          <div style="margin: 0 0 1.2rem; background: #0E1B18; color: #D9E2DD; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .8rem; line-height: 1.65; padding: 1.15rem 1.35rem; overflow-x: auto; white-space: pre;">hawkish_phrases = [<span style="color: #D0A03C;">"inflation remains elevated"</span>, <span style="color: #D0A03C;">"tightening"</span>, ...]
+dovish_phrases  = [<span style="color: #D0A03C;">"accommodative"</span>, <span style="color: #D0A03C;">"downside risks"</span>, ...]
 
 score = (hawkish_hits - dovish_hits) / (hawkish_hits + dovish_hits)
-<span class="c"># score runs -1 (fully dovish) .. +1 (fully hawkish)</span></div>
-    <p class="snippet-src">Condensed from scripts/12_stance_score.py</p>
+<span style="color: #6F847B;"># score runs -1 (fully dovish) .. +1 (fully hawkish)</span></div>
+          <p style="font-size: .98rem; color: #5A6862; margin: 0 0 1.05rem;">The direction models were run with and without these inputs on the same 402 weeks. One note so the numbers don&rsquo;t surprise you: these are <em>three-way</em> guesses, up or down or roughly flat, so random guessing scores about 33%. Numbers below 50% are normal here.</p>
+          <div style="overflow-x: auto;">
+            <table style="border-collapse: collapse; width: 100%; min-width: 30rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .82rem;">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Model</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Without, %</th>
+                  <th scope="col" style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">With, %</th>
+                  <th scope="col" style="text-align: left; padding: .6rem .8rem .6rem 0; border-bottom: 1.5px solid #16211D; font-weight: 600; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;">Verdict</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Logistic regression</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">39.6</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">38.1</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; color: #5A6862;">No measurable effect</td></tr>
+                <tr><th scope="row" style="text-align: left; font-weight: 600; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">Gradient boosting</th><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">42.5</td><td style="text-align: right; padding: .6rem 1.2rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14);">43.8</td><td style="padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(22,33,29,.14); font-family: 'Source Serif 4', Georgia, serif; font-size: .92rem; color: #5A6862;">No measurable effect</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .72rem; color: #5A6862; margin: .7rem 0 0;">Accuracy barely moved, and it moved in opposite directions for the two models. The uncertainty around both differences includes zero.</p>
+        </div>
 
-    <figure>
-      <img src="https://raw.githubusercontent.com/jatin-hans/currency-pair-prediction/main/outputs/case_study/figures/fomc_stance_timeline.png" width="934" height="303"
-           alt="Timeline of Fed statement scores 2015-2026: dovish through 2020, strongly hawkish 2022-23" loading="lazy">
-      <figcaption>
-        <b>How to read it:</b> red dots = hawkish statements, green = dovish, gray = neutral; the black line is the
-        average of the last four meetings. The scorer passes the sanity check - the 2022-23 rate-hike era
-        reads hawkish, the 2020 emergency cuts read dovish.
-      </figcaption>
-    </figure>
-    <p style="margin-top:1.4rem">
-      So the <em>measurement</em> works. But fed into the models across the same 402 weeks, the scores changed
-      nothing - predictions got no better with them than without. The input was rejected, and the experiment
-      kept in the repo as a documented negative. A measurement can be valid and still add no forecasting value; both
-      facts are worth publishing.
-    </p>
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.5 - Known limits of this study</h3>
+          <ul style="margin: 1.2rem 0 0; padding: 0; list-style: none;">
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>Three pairs only, two heavily traded and one from a developing economy. Don&rsquo;t assume the findings carry to other currencies</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>Roughness is estimated from end-of-day prices rather than measured minute by minute</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>No rupee version of the fund-positioning data exists, so USDINR sits that input out</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>Central-bank language covers the Fed only. The Indian central bank&rsquo;s statements were not machine-collectable</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>No transaction costs are modelled. This measures forecast quality, and says nothing about whether a trading strategy would clear costs</li>
+          </ul>
+        </div>
 
-    <div class="grid3">
-      <div class="card no">
-        <span class="tag">What this rules out</span>
-        <h3>Rate-direction inputs</h3>
-        <p>Ten years of public data give no reliable basis for a &ldquo;the rate will move this way next&rdquo;
-        prediction at day, week or month horizons. Worth knowing before it reaches a roadmap.</p>
-      </div>
-      <div class="card yes">
-        <span class="tag">What this supports</span>
-        <h3>Roughness-aware planning</h3>
-        <p>Forecast the size of the moves and let it set buffers, timing and limits. That is the part of the problem
-        public data actually answers.</p>
-      </div>
-      <div class="card flat">
-        <span class="tag">What it costs to check</span>
-        <h3>Free data, open tools</h3>
-        <p>Every result here comes from public sources and open-source tooling, and reruns from the repository.
-        Ruling something out cheaply is itself a deliverable.</p>
-      </div>
+        <div style="margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(22,33,29,.14);">
+          <h3 style="font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); letter-spacing: -.015em; margin: 0 0 .5rem;">A.6 - What is in the repository</h3>
+          <ul style="margin: 1.2rem 0 0; padding: 0; list-style: none;">
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>Two notebooks that tell the whole story. Direction end to end, then roughness, the planning rate and the Fed-language experiment</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>The full bench of fifteen direction models, including classic institutional and retail trading rules, each with its own scorecard</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>All raw data committed, so everything reruns offline. An offline validator checks every stored file</li>
+            <li style="padding: .55rem 0 .55rem 1.4rem; border-bottom: 1px solid rgba(22,33,29,.14); position: relative; font-size: .98rem;"><span style="position: absolute; left: 0; color: #5A6862; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;">-</span>Every table and chart on this page, regenerable from numbered scripts</li>
+          </ul>
+        </div>
+      </details>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ METHOD ============ -->
-<section>
-  <div class="wrap">
-    <p class="kicker">How it was tested</p>
-    <h2>Baselines named before models were built</h2>
-    <div class="method">
-      <div>
-        <h3>A named &ldquo;lazy guess&rdquo; for every question</h3>
-        <p>Repeat-the-last-period for direction, assume-it-continues for volatility, carry-forward for the planning
-        rate. Beat the lazy guess or it doesn't count - half of what this study found came from fixing the
-        comparison, not the model.</p>
-      </div>
-      <div>
-        <h3>Uncertainty stated on every claim</h3>
-        <p>Every headline number carries a statistical uncertainty range and its sample size. Small samples are
-        called anecdotes, not results.</p>
-      </div>
-      <div>
-        <h3>Confidence scored, not assumed</h3>
-        <p>Stated probabilities are graded against reality. Overconfident models get their confidence corrected
-        using data they haven&#x27;t seen - or are shown as-is, with a warning attached.</p>
-      </div>
-      <div>
-        <h3>Fully reproducible</h3>
-        <p>Data, pipeline, models and every chart on this page regenerate from the repository - two notebooks
-        tell the story end to end, numbered scripts rebuild every table.</p>
-      </div>
+  <footer style="padding: 2.6rem 0 3.4rem; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: .78rem; line-height: 1.7; color: #5A6862;">
+    <div style="width: min(44rem, 100% - 2.5rem); margin-inline: auto;">
+      <p style="max-width: 72ch; margin: 0;">All figures are stored snapshots from a frozen study, not live feeds. The notebooks, data, and the source script behind every chart and table are in <a href="https://github.com/jatin-hans/currency-pair-prediction">the project repository</a>. Nothing here is investment advice.</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ============ APPENDIX ============ -->
-<section id="appendix">
-  <div class="wrap">
-    <details class="appendix-details">
-      <summary>
-        <span class="kicker" style="display:block">Appendix</span>
-        <h2>Detail, caveats and what sits behind the summary</h2>
-        <span class="appendix-toggle"></span>
-      </summary>
-
-    <div class="appendix-block">
-      <h3>A.1 - Volatility at the monthly horizon</h3>
-      <p>The weekly result is the headline because it is the horizon most decisions run on. The monthly horizon has a
-      smaller sample and a less clean story: the simple model still wins on two pairs, the machine-learning variant
-      narrowly takes the rupee, and all the gaps are smaller.</p>
-      <div class="scroller">
-        <table>
-          <caption>Next-month forecast error - 97 months per pair; same error score as the weekly table, lower is better</caption>
-          <thead>
-            <tr><th scope="col">Pair</th><th scope="col">Forecaster</th><th scope="col" class="num">Error score</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row" rowspan="3">EURUSD</th><td>Do-nothing guess</td><td class="num">0.181</td></tr>
-            <tr><td>Volatility model (HAR)</td><td class="num best">0.153</td></tr>
-            <tr class="group-end"><td>HAR + machine learning</td><td class="num worse">0.219</td></tr>
-            <tr><th scope="row" rowspan="3">USDINR</th><td>Do-nothing guess</td><td class="num">0.626</td></tr>
-            <tr><td>Volatility model (HAR)</td><td class="num">0.488</td></tr>
-            <tr class="group-end"><td>HAR + machine learning</td><td class="num best">0.465</td></tr>
-            <tr><th scope="row" rowspan="3">USDJPY</th><td>Do-nothing guess</td><td class="num">0.335</td></tr>
-            <tr><td>Volatility model (HAR)</td><td class="num best">0.259</td></tr>
-            <tr><td>HAR + machine learning</td><td class="num worse">0.370</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="caption">
-        Measurement caveat: roughness here is estimated from end-of-day prices. Minute-by-minute data would measure
-        it more precisely, and wasn't available - so these are approximations and the claims are kept
-        proportionate to that.
-      </p>
-    </div>
-
-    <div class="appendix-block">
-      <h3>A.2 - The Fed-language numbers</h3>
-      <p>The direction models were run with and without the Fed-language inputs on the same 402 weeks. One note so
-      the numbers below don&#x27;t surprise you: these are <em>three-way</em> guesses - up, down, or
-      roughly flat - so random guessing scores about 33%, and numbers below 50% are normal, not broken.
-      Accuracy barely moved, in opposite directions for the two models, and the statistical uncertainty around both
-      differences includes zero - the definition of &ldquo;no measurable effect&rdquo;.</p>
-      <div class="scroller">
-        <table>
-          <caption>Direction accuracy with and without the Fed-language input - the same 402 weeks for both</caption>
-          <thead>
-            <tr><th scope="col">Model</th><th scope="col" class="num">Without</th><th scope="col" class="num">With</th><th scope="col">Verdict</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row">Logistic regression</th><td class="num">39.6%</td><td class="num worse">38.1%</td><td class="note">slightly worse - within noise</td></tr>
-            <tr><th scope="row">Gradient boosting</th><td class="num">42.5%</td><td class="num">43.8%</td><td class="note">slightly better - within noise</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="appendix-block">
-      <h3>A.3 - Known limits of this study</h3>
-      <ul class="plain">
-        <li>Three pairs only - two heavily traded, one from a developing economy. Findings should not be assumed to carry to other currencies</li>
-        <li>Roughness is estimated from end-of-day prices rather than measured minute by minute</li>
-        <li>No rupee version of the fund-positioning data exists, so USDINR sits that input out</li>
-        <li>Central-bank language covers the Fed only - the Indian central bank's statements were not machine-collectable</li>
-        <li>No transaction costs are modelled; this is about forecast quality, not a trading strategy</li>
-      </ul>
-    </div>
-
-    <div class="appendix-block">
-      <h3>A.4 - What is in the repository</h3>
-      <ul class="plain">
-        <li>Two notebooks that tell the whole story: direction end-to-end, then volatility, the planning rate and the Fed-language experiment</li>
-        <li>The full bench of fifteen direction models, including classic institutional and retail trading rules, each with its own scorecard</li>
-        <li>All raw data committed, so everything reruns offline; an offline validator checks every stored file</li>
-        <li>Every table and chart on this page, regenerable from numbered scripts</li>
-        <li>The full findings write-up with statistical detail kept out of this page</li>
-      </ul>
-    </div>
-    </details>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>All figures are stored snapshots from a frozen study, not live feeds. The notebooks, data, and the source
-    script behind every chart and table are in
-    <a href="https://github.com/jatin-hans/currency-pair-prediction">the project repository</a>. Nothing here is
-    investment advice.</p>
-  </div>
-</footer>
-
+</div>
 </body>
 </html>
