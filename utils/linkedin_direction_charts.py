@@ -1,4 +1,9 @@
-"""18: four social-format SVG charts from the EURUSD held-out predictions.
+"""One-off social asset — four LinkedIn-format SVGs of the EURUSD
+direction results (returns-by-prediction dots, confusion grids,
+cumulative-edge lines, hit/miss raster).
+
+Not part of the case-study pipeline; the study cites the notebook and
+script outputs directly.
 
 Re-scores B1 and B2 on the Block-6 rows (post-fix data), keeps the better
 one, and reduces everything to binary up/down: model_pred = P(up) > P(down),

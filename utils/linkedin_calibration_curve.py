@@ -1,4 +1,8 @@
-"""17: calibration curve for EURUSD direction on the held-out block.
+"""One-off social asset — calibration curve SVG for a LinkedIn post.
+
+Not part of the case-study pipeline; the study page uses the notebook's
+own calibration chart. Kept because it regenerates a standalone,
+hand-built SVG (no plotting library) from the held-out predictions.
 
 Re-scores logistic (B1), gradient boosting (B2) and a 3-state HMM on the
 Block-6 confirmation rows (n=322), saves per-prediction P(up) vs outcome
