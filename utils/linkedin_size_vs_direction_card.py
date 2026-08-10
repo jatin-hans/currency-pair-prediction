@@ -61,7 +61,7 @@ fig.text(0.06, 0.895, "It broadcasts how rough the ride will be.",
          fontsize=40 * PX, color=INK, weight="medium", va="top")
 
 # --- bars ---
-ax = fig.add_axes([0.21, 0.40, 0.50, 0.38])
+ax = fig.add_axes([0.21, 0.3333, 0.50, 0.4120])
 xmax = max(b for _, b in means.values()) * 1.28
 ys, h, gap = [], 0.30, 0.42
 y = 0.0
@@ -76,20 +76,20 @@ for i, (w, b) in enumerate(means.values()):
     ys.append(y - gap / 2)
     y -= 1.35
 ax.set_xlim(0, xmax)
-ax.set_ylim(y + 1.35 - gap - 0.55, 0.45)
+ax.set_ylim(-3.27, 0.15)  # bars flush to the axes box: top 275px, bottom 720px
 ax.axis("off")
 for (p, _), yc in zip(means.items(), ys, strict=True):
     ax.text(-xmax * 0.04, yc, p, fontsize=22 * PX, color=INK,
             ha="right", va="center", weight="medium")
 
-fig.text(0.21, 0.345, "bar length = how much the past ten days help predict today",
+fig.text(0.21, 0.296, "bar length = how much the past ten days help predict today",
          fontsize=20 * PX, color=MUTED)
 
-# --- callout, under the right end of the USDINR bar ---
-fig.text(0.635, 0.245, "5-8x", fontsize=44 * PX, color=BLUE,
-         weight="bold", ha="center")
-fig.text(0.635, 0.205, "how much more the size\nof a move tells you\nthan its direction",
-         fontsize=22 * PX, color=INK, ha="center", va="top", linespacing=1.45)
+# --- callout, right of the chart, level with the USDJPY row ---
+fig.text(0.655, 0.60, "5-8x", fontsize=44 * PX, color=BLUE,
+         weight="bold", ha="left")
+fig.text(0.655, 0.555, "how much more the size\nof a move tells you\nthan its direction",
+         fontsize=22 * PX, color=INK, ha="left", va="top", linespacing=1.45)
 
 fig.text(0.06, 0.075, "three currency pairs · ten years of daily closes",
          fontsize=19 * PX, color=MUTED)
